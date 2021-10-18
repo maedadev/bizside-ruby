@@ -1,0 +1,43 @@
+default: &default
+  store_dir: 'tmp'
+  cache_dir: '/tmp'
+  fog: &default_fog
+    credentials: &default_credentials
+      provider: :softlayer
+      softlayer_storage_account: 'IBMOS299601-2'
+      softlayer_username: 'hatanaka'
+      softlayer_api_key: '108d2a4e82b663a287c4a07f2212fc495abb8624be007d56ca4f7cbb3de50e67'
+      softlayer_cluster: 'tok02'
+    container: "data"
+production:
+  <<: *default
+development:
+  <<: *default
+test:
+  <<: *default
+  fog:
+    credentials: &test_credentials
+      provider: :softlayer
+      softlayer_storage_account: 'test'
+      softlayer_username: 'test'
+      softlayer_api_key: 'test'
+      softlayer_cluster: 'test01'
+    container: "data"
+test2:
+  store_dir: 'tmp'
+  cache_dir: '/tmp'
+test_private:
+  <<: *default
+  fog:
+    <<: *default_fog
+    credentials:
+      <<: *test_credentials
+csc:
+  <<: *default
+  store_dir: 'csc'
+  fog:
+    <<: *default_fog
+    credentials:
+      <<: *default_credentials
+      softlayer_cluster: 'sng01'
+    container: "archives"

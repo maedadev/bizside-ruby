@@ -1,0 +1,11 @@
+default: &default
+  hosts:
+    - localhost
+app:
+  <<: *default
+job:
+  <<: *default
+test:
+  <<: *default
+
+

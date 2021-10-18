@@ -1,0 +1,53 @@
+# = NAME
+# hanaita.yml - インスタンス間共通環境依存情報(テスト用)
+#
+# = SYNOPSIS
+#
+# = DESCRIPTION
+
+
+# 各インスタンスで共通の設定項目のうち、ログ関連
+log:
+  # ログアップロード関連
+  upload:
+    # ログアップロードする/しない
+    enabled:              true   # false
+
+    # アップロード先は aws-es か否か
+    host_type:            aws-es # or else
+
+    # ホスト名(AWSの場合、エンドポイント)
+    host:                 test-el.ap-northeast-1.es.example.com
+
+    # host_type=='aws-es' の際のAWS用追加パラメータ
+    aws:
+      # AWSのElasticSearchServiceのエンドポイントのリージョン
+      region:             ap-northeast-1
+
+      # AWSのElasticSearchServiceのアクセスポリシーに設定したユーザのアクセスキー
+      access_key_id:      dummy_id
+      secret_access_key:  dummy_key
+
+  # アーカイブ関連
+  archive:
+    # 保存先
+    driver:               fog
+
+    fog:
+      credentials:
+        provider:               AWS
+        region:                 ap-northeast-1
+
+        # VCR に記録する際は実際の keyペアを使用しますが、
+        # 記録後、gitにコミットする段階で、秘密鍵の保安のため、
+        # 下記作業を行います:
+        #
+        # 1. 本 hanaita.yml をダミー値でコミット
+        # 2. vcr/**/*.yml のキーを 1. と同じ値のダミー値に差し替えコミット
+        aws_access_key_id:      dummy_id
+        aws_secret_access_key:  dummy_key
+
+      # テスト用バケット
+      #
+      # VCR記録中は実在させておく必要があります。
+      container:                ts-bizside-test-app-archives

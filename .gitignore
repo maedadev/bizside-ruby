@@ -1,0 +1,12 @@
+/bizside_test_app/.byebug_history
+/bizside-*.gem
+/.project
+/tmp
+/test/reports
+*~
+/.bundle
+/.buildpath
+/.idea
+/nbproject
+/bizside.iml
+/Gemfile.lock

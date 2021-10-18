@@ -1,0 +1,12 @@
+ja:
+  bizside:
+    messages:
+      logout_not_available: 全てのブラウザを閉じるまでログアウトは完了しません。\n席を離れる際には全ブラウザを閉じてください。
+
+  errors:
+    messages:
+      content_type_whitelist_error: にContent-Typeが%{content_type}のファイルをアップロードすることはできません。
+      extension_white_list_error: に拡張子が %{extension} のファイルをアップロードすることはできません。
+      extension_whitelist_error: に拡張子が %{extension} のファイルをアップロードすることはできません。
+      filename_error: '%{filename} に使用できない文字が含まれています。'
+      mini_magick_processing_error: 画像ファイルの編集に失敗しました。%{e}"

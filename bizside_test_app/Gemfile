@@ -1,0 +1,50 @@
+source 'https://rubygems.org'
+
+
+gem 'rails', '~> 5.2.6'
+
+gem 'bizside', :path => '..'
+gem 'aws-sdk-s3'
+gem 'carrierwave'
+gem 'coffee-rails', '~> 4.2'
+gem 'fog-aws'
+gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+gem 'nokogiri'
+gem 'sqlite3', '~> 1.3.6'
+gem 'redis', '~> 4.0'
+gem 'request-log-analyzer'
+gem 'resque'
+gem 'resque-scheduler'
+gem 'rmagick'
+gem 'sass-rails', '~> 5.0'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
+
+group :development, :test do
+  gem 'byebug'
+  gem 'cucumber', '~> 3.2'
+end
+
+group :development do
+  gem 'spring'
+  gem 'web-console', '>= 3.3.0'
+end
+
+group :test do
+  gem 'RedCloth'
+  gem 'database_cleaner'
+  gem 'minitest'
+  gem 'minitest-rails'
+  gem 'minitest-reporters'
+  gem 'puma'
+  gem 'rails-controller-testing'
+  gem 'simplecov'
+  gem 'simplecov-rcov'
+  gem 'webmock'
+end
+
+group :itamae_plugin do
+  gem 'itamae-plugin-recipe-selenium'
+end

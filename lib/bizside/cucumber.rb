@@ -1,0 +1,1 @@
+raise LoadError.new('Cucumber関係は bizside_tools.gem に移行しました。 bizside/cucumber の替わりに bizisde_tools/cucumber を require してください')

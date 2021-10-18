@@ -1,0 +1,14 @@
+default: &default
+  log:
+    base_dir: '/var/bizside/analyze_log/'
+    env: test
+  redmine:
+    api_key: testtest
+production:
+  <<: *default
+development:
+  <<: *default
+test:
+  <<: *default
+  log:
+    base_dir: '/tmp/bizside_test_app/analyze_log/'

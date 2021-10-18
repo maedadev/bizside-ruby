@@ -1,0 +1,30 @@
+# = NAME
+# itamae.yml - itamae_conf 設定情報(テスト用)
+
+default: &default
+  rails_env:        development
+  rails_root:       /home/railsdev/maeken/bizside_test_app
+  zabbix:
+    agent: &zabbix_agent
+      hosts: &zabbix_hosts
+        127.0.0.1:  localhost
+      log_watch:
+        install:    true
+      mysql:
+        install:    false
+
+app:
+  <<: *default
+  web_server_type:  httpd
+  shib_enabled:     false
+  httpd_listen_80:  true
+  httpd_listen_443: false
+  hosts:
+    - 127.0.0.1
+    - 127.0.0.2
+  zabbix:
+    agent:
+      <<: *zabbix_agent
+      hosts:
+        <<: *zabbix_hosts
+        127.0.0.2:  localhost2
