@@ -1,15 +1,34 @@
-bizside.gem
-===
+# bizside.gem
 
-bizside.gemは環境構築のための各種Rakeタスク（セットアップスクリプト）群やBizsideのシステム基盤機能を提供するgemです。
+bizside.gem はWebアプリケーションに求められる汎用的な機能を提供する gem ライブラリです。Railsアプリケーションでの利用を主なターゲットとしていますが、Railsアプリケーション以外でも利用可能です。
 
----
+## Features
 
-bizside.gem を更新する際には、下記を更新する必要があります。
+bizside.gem は以下の機能を提供します。
 
-* 対象ファイルの修正
-* lib/bizside/version.rb のバージョンを更新
-* 「bundle install」の実行(Gemfile.lockの更新)
-* 「bundle exec rake test」の実行(bizside_test_app/Gemfile.lockの更新)
-* HISTORY.mdに変更点を記載
-* 更新バージョンのGitTag作成
+* 文字列/SQL操作ユーティリティ
+* バックグラウンドジョブの管理機能
+* ファイルアップロード機能
+* オブジェクトキャッシュ機能
+* 監査ログの出力機能
+* etc
+
+
+## Installation
+
+gem単独でインストールする場合
+
+```
+gem install bizside
+```
+
+RailsなどBundlerで管理された環境の場合. Gemfile に以下を記載
+
+```
+gem 'bizside'
+```
+
+
+## Copyright
+
+Copyright (c) 2021 maedadev. MIT License
