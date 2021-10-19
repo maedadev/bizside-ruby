@@ -1,3 +1,6 @@
+## 2.0.0
+  * OSSとして公開(https://github.com/maedadev/bizside-ruby)
+
 ## 1.5.8
   * リファクタリング（#56459）
   * Rails に依存しないクラスの読み込みを lib/bizside/railtie.rb から lib/bizside.rb に移動 （#56732）

@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    bizside (1.5.8)
+    bizside (2.0.0)
       activesupport (>= 5.0.0, < 6.0.0)
       aws-sdk-s3 (~> 1.94)
       capistrano (< 3.0.0)
