@@ -29,9 +29,9 @@ module Bizside
       end
 
       if queue.present?
-        Resque.enqueue_to(queue, klass, *args)
+        ::Resque.enqueue_to(queue, klass, *args)
       else
-        Resque.enqueue(klass, *args)
+        ::Resque.enqueue(klass, *args)
       end
     end
 
@@ -64,7 +64,7 @@ module Bizside
         Bizside.logger.info "遅延ジョブ #{klass} を登録します。"
       end
 
-      Resque.enqueue_at(time, klass, *args)
+      ::Resque.enqueue_at(time, klass, *args)
     end
 
     def self.set_job_silently_at(time, klass, *args)
@@ -79,7 +79,7 @@ module Bizside
         return
       end
 
-      Resque.remove_delayed(klass, *args)
+      ::Resque.remove_delayed(klass, *args)
     end
 
     def self.add_cron(name, job_type, cron, *args)
@@ -92,7 +92,7 @@ module Bizside
         return
       end
 
-      Resque.remove_schedule(name)
+      ::Resque.remove_schedule(name)
 
       cronline = Array(cron).first
 
@@ -108,7 +108,7 @@ module Bizside
 
         config[:queue] = queue if queue.present?
 
-        Resque.set_schedule(name, config)
+        ::Resque.set_schedule(name, config)
       else
         raise ArgumentError, "Cronの書式が正しくないのでスケジューリングしません。name=#{name}"
       end
@@ -124,7 +124,7 @@ module Bizside
         return
       end
 
-      Resque.remove_schedule(name)
+      ::Resque.remove_schedule(name)
 
       if interval_args[:cron].present?
         add_cron(name, job_type, interval_args[:cron], args)
@@ -135,7 +135,7 @@ module Bizside
           :args => args,
           :persist => true
         }
-        Resque.set_schedule(name, config)
+        ::Resque.set_schedule(name, config)
       else
         raise ArgumentError, "cronもしくはeveryが指定されていないのでスケジューリングしません。name=#{name}"
       end
@@ -147,7 +147,7 @@ module Bizside
         return
       end
 
-      Resque.remove_schedule(name)
+      ::Resque.remove_schedule(name)
     end
 
     def self.peek(queue, start = 0, count = 1)
@@ -156,7 +156,7 @@ module Bizside
         return []
       end
 
-      Resque.peek(queue, start, count)
+      ::Resque.peek(queue, start, count)
     end
 
     def self.enqueue_in(time_to_delay, klass, *args)
@@ -165,7 +165,7 @@ module Bizside
         return
       end
 
-      Resque.enqueue_in(time_to_delay, klass, *args)
+      ::Resque.enqueue_in(time_to_delay, klass, *args)
     end
 
     def self.enqueue_in_with_queue(queue, time_to_delay, klass, *args)
@@ -174,7 +174,7 @@ module Bizside
         return
       end
 
-      Resque.enqueue_in_with_queue(queue, time_to_delay, klass, *args)
+      ::Resque.enqueue_in_with_queue(queue, time_to_delay, klass, *args)
     end
 
     def self.dequeue(klass, *args)
@@ -183,12 +183,12 @@ module Bizside
         return
       end
 
-      Resque.dequeue(klass, *args)
+      ::Resque.dequeue(klass, *args)
     end
 
     def self.any_jobs_for?(queue)
-      ret = Resque.size(queue)
-      ret += Resque.working.reduce(0){|sum, worker| sum += worker.queues.include?(queue) ? 1 : 0 }
+      ret = ::Resque.size(queue)
+      ret += ::Resque.working.reduce(0){|sum, worker| sum += worker.queues.include?(queue) ? 1 : 0 }
       ret > 0
     end
 
@@ -198,17 +198,17 @@ module Bizside
         return
       end
 
-      Resque.remove_queue(queue)
+      ::Resque.remove_queue(queue)
     end
 
     def self.queue_from_class(klass)
-      Resque.queue_from_class(klass)
+      ::Resque.queue_from_class(klass)
     end
 
     def self.queue_size(queue)
       return 0 if Bizside.rails_env&.test?
 
-      Resque.size(queue)
+      ::Resque.size(queue)
     end
 
     def self.unique_in_queue?(klass, args = {}, queue, count: 100, except: [])
@@ -272,13 +272,13 @@ module Bizside
         return []
       end
 
-      Resque::Failure.all(start, count, queue)
+      ::Resque::Failure.all(start, count, queue)
     end
 
     def self.failure_count(queue = nil, class_name = nil)
       return 0 if Bizside.rails_env&.test?
 
-      Resque::Failure.count(queue, class_name)
+      ::Resque::Failure.count(queue, class_name)
     end
 
   end
