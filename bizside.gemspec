@@ -8,17 +8,15 @@ Gem::Specification.new do |s|
   s.name        = 'bizside'
   s.version     = Bizside::VERSION
   s.date        = Date.today
-  s.summary     = 'Bizside common utilities'
-  s.description = 'Utilities to assist building Bizside-compatible Rails applications.'
-  s.authors     = ['acs']
-  s.email       = ['admin@acs-jp.com']
-  s.homepage    = 'http://www.maedadev.com'
-  s.licenses    = 'Nonstandard'
+  s.summary     = 'Bizside is an utilities for web application.'
+  s.description = 'Bizside is an utilities to assist building web application.'
+  s.authors     = ['bizside-developers']
+  s.email       = ['bizside-developers@lab.acs-jp.com']
+  s.homepage    = 'https://github.com/maedadev/bizside-ruby'
+  s.licenses    = 'MIT'
   s.files       = Dir['app/**/*'] +
                   Dir['lib/**/*'] +
                   Dir['rails/**/*'] +
-                  Dir['resque/**/*'] +
-                  Dir['ssl/**/*'] +
                   Dir['validations/**/*']
 
   s.required_ruby_version = '>= 2.5.0'
