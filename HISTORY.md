@@ -1,4 +1,5 @@
 ## 2.0.0
+  * JobUtils で参照していた Resque が空モジュール(Bizside::Resque) となっていたため修正
   * OSSとして公開(https://github.com/maedadev/bizside-ruby)
 
 ## 1.5.8
