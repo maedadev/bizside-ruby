@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class StringUtilsTest < ActiveSupport::TestCase
+class Bizside::StringUtilsTest < ActiveSupport::TestCase
   
   def test_rand_string
-    s = StringUtils.rand_string
+    s = Bizside::StringUtils.rand_string
     assert s =~ /^(?=.*?[a-z])(?=.*?\d).*+$/iu
   end
 
