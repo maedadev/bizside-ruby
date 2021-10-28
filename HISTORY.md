@@ -1,4 +1,5 @@
-## 2.0.0
+## 2.0.1
+  * bizside/file_uploader のバグフィックス
   * OSSとして公開(https://github.com/maedadev/bizside-ruby)
 
 ## 1.5.8
