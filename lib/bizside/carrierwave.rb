@@ -1,3 +1,5 @@
+require 'carrierwave'
+
 # 日本語ファイル名のまま保存
 CARRIERWAVE_SANITIZE_REGEXP = /[^[:word:]①-⑨【】「」（）・＆、　 \(\)\.\-\+]/
 CarrierWave::SanitizedFile.sanitize_regexp = CARRIERWAVE_SANITIZE_REGEXP
@@ -12,6 +14,11 @@ module Bizside
       original_filename
     end
   end
+end
+
+unless Bizside.config.within_bizside_namespace?
+  # 後方互換性の維持
+  CarrierwaveStringIO = Bizside::CarrierwaveStringIO
 end
 
 CarrierWave.configure do |config|
