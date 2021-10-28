@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BiziseTest < ActiveSupport::TestCase
   TARGET_CLASS_NAMES = %w[
-    CarrierwaveStringIO CronValidator Gengou JobUtils QueryBuilder
+    CronValidator Gengou JobUtils QueryBuilder
     RecordHasWarnings SqlUtils StringUtils UserAgent Yes
   ].freeze
   TEMP_BIZSIDE_YAML_PATH = File.join('tmp', 'bizside.yml')

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GengouTest < ActiveSupport::TestCase
+class Bizside::GengouTest < ActiveSupport::TestCase
   
   def test_good
     [
@@ -14,7 +14,7 @@ class GengouTest < ActiveSupport::TestCase
       '0,10-20 * * * *',
       '0,10-20/2 * * * *'
     ].each do |line|
-      validator = CronValidator.new(line)
+      validator = Bizside::CronValidator.new(line)
       assert validator.valid?
     end
   end
@@ -34,7 +34,7 @@ class GengouTest < ActiveSupport::TestCase
       'a * * * *',
       ''
       ].each do |line|
-        validator = CronValidator.new(line)
+        validator = Bizside::CronValidator.new(line)
         assert ! validator.valid?
       end
   end

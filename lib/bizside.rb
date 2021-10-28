@@ -85,7 +85,7 @@ end
 
 unless Bizside.config.within_bizside_namespace?
   %w[
-    CarrierwaveStringIO CronValidator Gengou JobUtils QueryBuilder
+    CronValidator Gengou JobUtils QueryBuilder
     SqlUtils RecordHasWarnings StringUtils UserAgent Yes
   ].each do |class_name|
     bizside_class_name = "::Bizside::#{class_name}"
