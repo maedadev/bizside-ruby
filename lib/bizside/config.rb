@@ -35,6 +35,11 @@ module Bizside
       @hash.dup
     end
 
+    # Hash継承時代での互換維持のために実装
+    def empty?
+      @hash.empty?
+    end
+
     # オブジェクトの Hash への暗黙の変換が必要なときに内部で呼ばれるメソッド
     # Hash継承時代での互換維持のために実装。
     # なお、Hashの継承時代でも @hash を活用していたので、空ハッシュを返す
