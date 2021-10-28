@@ -1,3 +1,6 @@
+## 2.0.2
+  * Bizside::FileUploader#downloaded_file が返すパスにファイルが存在しない場合にハンドリングする(#57053)
+
 ## 2.0.1
   * bizside/file_uploader のバグフィックス
   * OSSとして公開(https://github.com/maedadev/bizside-ruby)
