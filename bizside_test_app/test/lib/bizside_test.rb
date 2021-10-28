@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BiziseTest < ActiveSupport::TestCase
   TARGET_CLASS_NAMES = %w[
-    CarrierwaveStringIO CronValidator Gengou JobUtils QueryBuilder
+    CronValidator Gengou JobUtils QueryBuilder
     RecordHasWarnings SqlUtils StringUtils UserAgent Yes
   ].freeze
   TEMP_BIZSIDE_YAML_PATH = File.join('tmp', 'bizside.yml')
@@ -12,6 +12,7 @@ class BiziseTest < ActiveSupport::TestCase
     # bizside.rb を load すると config/bizside.yml から設定がリロードされる。
     # よってテスト対象の設定値が記載されたYAMLのパスを環境変数で指定する。
     ENV['CONFIG_FILE'] = TEMP_BIZSIDE_YAML_PATH
+    FileUtils.mkdir_p('tmp')
 
     TARGET_CLASS_NAMES.each do |class_name|
       ::Object.__send__(:remove_const, class_name) rescue nil
