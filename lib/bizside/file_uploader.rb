@@ -53,7 +53,7 @@ module Bizside
 
     def download_file_from_fog(path)
       tmp_path = "/tmp/#{Bizside.config.add_on_name}-#{Bizside::StringUtils.current_time_string}-#{File.basename(path)}"
-      system("curl '#{file.url}' -o '#{tmp_path}'")
+      raise "File download failed.(curl '#{file.url}' -o '#{tmp_path}')" unless system("curl '#{file.url}' -o '#{tmp_path}'")
       tmp_path
     end
 
@@ -62,7 +62,7 @@ module Bizside
       unless File.exist?(cache_path)
         FileUtils.mkdir_p(File.dirname(cache_path))
         tmp_path = download_file_from_fog(path)
-        system("mv '#{tmp_path}' '#{cache_path}'")
+        raise "Failed to move file.(mv '#{tmp_path}' '#{cache_path}')" unless system("mv '#{tmp_path}' '#{cache_path}'")
       end
       cache_path
     end
