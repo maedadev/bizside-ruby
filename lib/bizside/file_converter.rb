@@ -1,5 +1,3 @@
-require 'rmagick'
-
 module Bizside
   module FileConverter
     EXT_IMAGE = ['.gif', '.jpg', '.jpeg', '.png']
@@ -26,6 +24,7 @@ module Bizside
     end
 
     def self.convert_to_image(file)
+      require 'rmagick'
 
       case File.extname(file.path)
       when *EXT_IMAGE

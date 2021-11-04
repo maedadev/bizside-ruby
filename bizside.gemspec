@@ -42,5 +42,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'ipaddress', '~> 0.8'
   s.add_development_dependency 'rails', '>= 5.0.0', '< 6.0.0'
   s.add_development_dependency 'resque', '>= 1.27', '< 3.0.0'
+  s.add_development_dependency 'rmagick', '>= 4.2.3', '< 5.0.0'
   s.add_development_dependency 'sqlite3', '~> 1.3', '< 1.4.0'
 end

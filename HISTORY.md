@@ -1,3 +1,6 @@
+## 2.0.4
+  * Bizside::FileConverter による rmagick のロードは必要になったタイミングで require するように
+
 ## 2.0.3
   * ENV[COVERAGE]の値に関わらずカバレージ計測をしてしまう不具合の修正(#57337)
 
