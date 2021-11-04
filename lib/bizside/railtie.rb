@@ -1,4 +1,5 @@
 require_relative 'coverage/launch'
+Bizside::CoverageLaunch.load()
 
 module Bizside
   class Railtie < ::Rails::Railtie
