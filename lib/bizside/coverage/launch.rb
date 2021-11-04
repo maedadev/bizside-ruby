@@ -12,14 +12,14 @@ module Bizside
   end
 end
 
-if ENV["COVERAGE"].to_s.downcase == 'true' and ENV['ACCEPTANCE_TEST'].to_s.downcase == 'true'
+if Bizside::Yes.confirmed?(ENV['COVERAGE']) and Bizside::Yes.confirmed?(ENV['ACCEPTANCE_TEST'])
   Bizside::CoverageLaunch.setup()
 
   SimpleCov.start 'rails' do
     SimpleCov.command_name(ENV['COMMAND_NAME']) if ENV['COMMAND_NAME']
     SimpleCov.merge_timeout(7200)
   end
-elsif ENV["COVERAGE"]
+elsif Bizside::Yes.confirmed?(ENV['COVERAGE'])
   Bizside::CoverageLaunch.setup()
   SimpleCov.start 'rails'
 end
