@@ -45,7 +45,7 @@ module Bizside
       begin
         super
       rescue Errno::ENAMETOOLONG => e
-        if Bizside.config.storage.ignore_long_filename_error?
+        if Bizside.config.file_uploader.ignore_long_filename_error?
           if self.model.respond_to?(:original_filename)
             self.model.original_filename = filename
           end

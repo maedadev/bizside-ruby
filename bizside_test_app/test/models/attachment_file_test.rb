@@ -11,13 +11,13 @@ class AttachmentFileTest < ActiveSupport::TestCase
       original_filename: original_filename
     )
 
-    assert_not Bizside.config.storage.ignore_long_filename_error?
+    assert_not Bizside.config.file_uploader.ignore_long_filename_error?
     assert_raise Errno::ENAMETOOLONG do
       af = AttachmentFile.new(file: file)
     end
 
-    Bizside.config.storage['ignore_long_filename_error'] = true
-    assert Bizside.config.storage.ignore_long_filename_error?
+    Bizside.config['file_uploader'] = {'ignore_long_filename_error' => true}
+    assert Bizside.config.file_uploader.ignore_long_filename_error?
     af = AttachmentFile.new(file: file)
     assert af.invalid?
     assert af.errors[:original_filename].any?, 'original_filename で入力エラーが発生していること'
