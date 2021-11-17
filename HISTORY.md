@@ -1,3 +1,6 @@
+## 2.0.5（未リリース）
+  * Carrierwaveでアップロード時にファイル名の長さチェックができるように拡張（PR#13）
+
 ## 2.0.4
   * Bizside::FileConverter による rmagick のロードは必要になったタイミングで require するように
 
