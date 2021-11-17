@@ -6,47 +6,12 @@ default: &default
   db:
     dump:
       backup_dir: /tmp/bizside_test_app/db_dump
-  rsync:
-    backup:
-      bizside_test_app:
-        data_dir: 'localhost:/data/bizside_test_app'
-        backup_base_dir: '/tmp/bizside_test_app'
-        generations: 5
-      okoze:
-        data_dir: 'railsdev@okoze.jcity.maeda.co.jp:/data/okoze'
-        backup_base_dir: '/tmp/okoze'
-        ssh_key: 'features/config/ssh/test.identity'
-        generations: 5
-        crontab: '55 * * * *'
-      webcam:
-        data_dir: 'railsdev@webcam.jcity.maeda.co.jp:/var/webcam'
-        backup_base_dir: '/tmp/webcam'
-        ssh_key: 'features/config/ssh/test.identity'
-        generations: 5
-        crontab: '56 * * * *'
-    migrate:
-      bizside_test_app:
-        target_log_dir: 'localhost:/var/okoze/log'
-        backup_log_dir: '/var/bizside_test_app/log'
-      csc:
-        target_log_dir: 'railsdev@okoze.jcity.maeda.co.jp:/var/csc/log'
-        backup_log_dir: '/var/csc/log'
-      okoze:
-        target_log_dir: 'railsdev@okoze.jcity.maeda.co.jp:/var/okoze/log'
-        backup_log_dir: '/var/okoze/log'
   jod_converter:
     enabled: true
   log:
     backup:
       backup_dir: /var/bizside_test_app/backup
       crontab: '0 0 * * *'
-    archive:
-      bizside_test_app:
-        archive_src: '/var/bizside_test_app/log/archives'
-      csc:
-        archive_src: '/var/csc/log/archives'
-      okoze:
-        archive_src: '/var/okoze/log/archives'
     env: 'test'
   mail_from: from@example.com
   prefix: /bizside_test_app

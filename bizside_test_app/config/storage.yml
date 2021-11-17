@@ -32,12 +32,3 @@ test_private:
     <<: *default_fog
     credentials:
       <<: *test_credentials
-csc:
-  <<: *default
-  store_dir: 'csc'
-  fog:
-    <<: *default_fog
-    credentials:
-      <<: *default_credentials
-      softlayer_cluster: 'sng01'
-    container: "archives"
