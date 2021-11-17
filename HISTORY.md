@@ -1,11 +1,11 @@
 ## 2.0.5（未リリース）
   * Carrierwaveでアップロード時にファイル名の長さチェックができるように拡張（PR#13）
 
-    長いファイル名（Linuxの場合255バイトより長い）の場合、ファイルをキャッシュするタイミングで Errno::ENAMETOOLONG が発生していました。
+    長い（Linuxの場合255バイトより長い）ファイル名の場合、ファイルをキャッシュするタイミングで Errno::ENAMETOOLONG が発生していました。
     Bizside::FileUploader の挙動を設定で制御できるようになりました。
 
     * Bizside.config.file_uploader.ignore_long_filename_error が true の場合
-      Errno::ENAMETOOLONG を発生を抑制します。
+      Errno::ENAMETOOLONG の発生を抑制します。
       モデルに original_filename というプロパティがある場合は、当該プロパティにファイル名を設定します。
       以下のようなモデルのバリデーションを定義することで、エラーを通知することが可能です。
       
@@ -18,7 +18,7 @@
       これまでどおり Errno::ENAMETOOLONG が発生します。
       
     デフォルトでは ignore_long_filename_error は false で、互換性を維持しています。
-    アプリ側で適切なファイル名のバリデーションを行う場合は ignore_long_filename_error を true にしてください。
+    アプリ側でファイル名の適切なバリデーションを行う場合は ignore_long_filename_error を true にしてください。
     いずれの場合もファイルのキャッシュは実施されていないため、正常系の処理を続けることはできません。
 
 ## 2.0.4
