@@ -27,6 +27,7 @@ default: &default
   warning_validation:
     enabled: true
   file_uploader:
+    ignore_long_filename_error: false #originai_filename をモデルで定義している場合は、true に設定し、ファイル名の長さチェックを行うことが望ましい。デフォルトは false
     #extension_whitelist_enabled: （Bizsideのホワイトリストをする場合true。falseはデフォルトで拡張子制限なし。）
     #api_enabled: (APIでポータルの拡張子一覧と連携するかどうか。falseのときはファイルから読み込まれる。)
     #extensions_file_path: （アップロード可能拡張子一覧のYAMLファイルのパス。指定なしの場合はbizside.gem内のデフォルトを使用）

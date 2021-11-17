@@ -4,12 +4,7 @@ require_relative 'carrierwave'
 require_relative 'uploader/extension_whitelist'
 require_relative 'uploader/filename_validator'
 require_relative 'uploader/content_type_validator'
-
-if defined?(Rails) && Rails.application.class.parent_name.eql?('BizsideTestApp')
-  # not require 'uploader/exif'
-else
-  require_relative 'uploader/exif'
-end
+require_relative 'uploader/exif'
 
 module Bizside
   # === storage.yml
@@ -43,6 +38,21 @@ module Bizside
 
     def downloaded_file
       Bizside.config.storage.fog? ? downloaded_file_from_fog(file.path) : file.path
+    end
+
+    # ファイル名の長さチェックが可能なように
+    def cache!(new_file = sanitized_file)
+      begin
+        super
+      rescue Errno::ENAMETOOLONG => e
+        if Bizside.config.file_uploader.ignore_long_filename_error?
+          if self.model.respond_to?(:original_filename)
+            self.model.original_filename = filename
+          end
+        else
+          raise e
+        end
+      end
     end
 
     private
