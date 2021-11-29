@@ -25,7 +25,7 @@ module Bizside
 
       ret
     end
-    
+
     def []=(key, value)
       value = self.class.new(value) if value.is_a?(Hash)
       @hash[key.to_s] = value
@@ -52,8 +52,10 @@ module Bizside
     def method_missing(name, *args)
       ret = self[name]
 
-      if ret.is_a?(Hash) and not args[0].nil?
-        ret = args[0]
+      if ret.is_a?(Hash) || ret.is_a?(::Bizside::Config)
+        unless args[0].nil?
+          ret = self[name] = args[0]
+        end
       end
 
       ret
