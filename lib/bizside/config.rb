@@ -54,7 +54,7 @@ module Bizside
 
       if ret.is_a?(Hash) || ret.is_a?(::Bizside::Config)
         unless args[0].nil?
-          ret = args[0]
+          ret = self[name] = args[0]
         end
       end
 
