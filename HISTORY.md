@@ -1,4 +1,4 @@
-## 2.0.6
+## 2.0.6（not released yet）
   * JobUtils#enqueue_at_with_queue を追加
   * JobUtils#enqueue_at_with_queue_silently を追加
   * JobUtils#remove_delayed_in_queue を追加
