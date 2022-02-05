@@ -1,3 +1,8 @@
+## 2.0.6
+  * JobUtils#enqueue_at_with_queue を追加
+  * JobUtils#enqueue_at_with_queue_silently を追加
+  * JobUtils#remove_delayed_in_queue を追加
+
 ## 2.0.5
   * Carrierwaveでアップロード時にファイル名の長さチェックができるように拡張（PR#13）
 

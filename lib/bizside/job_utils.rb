@@ -47,6 +47,41 @@ module Bizside
       end
     end
 
+    def self.enqueue_at_with_queue(queue, time, klass, *args)
+      if Bizside.rails_env&.test?
+        if klass.respond_to?(:before_enqueue)
+          return unless klass.before_enqueue(*args)
+        end
+
+        Bizside.logger.info "テスト時には遅延ジョブの登録を行わず、即時実行します。"
+        klass.perform(*args)
+        return
+      end
+
+      if block_given?
+        yield
+      else
+        Bizside.logger.info "遅延ジョブ #{klass} を #{queue} に登録します。"
+      end
+
+      ::Resque.enqueue_at_with_queue(queue, time, klass, *args)
+    end
+
+    def self.enqueue_at_with_queue_silently(queue, time, klass, *args)
+      enqueue_at_with_queue(queue, time, klass, *args) do
+        # 何も出力しない
+      end
+    end
+
+    def self.remove_delayed_in_queue(klass, queue, *args)
+      if Bizside.rails_env&.test?
+        Rails.logger.info "テスト時には遅延ジョブのキャンセルを行いません。"
+        return
+      end
+
+      ::Resque.remove_delayed_in_queue(klass, queue, *args)
+    end
+
     def self.set_job_at(time, klass, *args)
       if Bizside.rails_env&.test?
         if klass.respond_to?(:before_enqueue)
