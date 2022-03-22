@@ -1,3 +1,6 @@
+## 2.0.7
+  * job_audit.log 出力に server_address を追加
+
 ## 2.0.6
   * JobUtils#enqueue_at_with_queue を追加
   * JobUtils#enqueue_at_with_queue_silently を追加

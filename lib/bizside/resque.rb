@@ -121,6 +121,7 @@ module Resque
         info = {
           time: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z'),
           add_on_name: Bizside.config.add_on_name,
+          server_address: hostname,
           class: payload['class'],
           args: payload['args'].to_s,
           queue: queue,
@@ -130,6 +131,19 @@ module Resque
           exception_backtrace: Array(exception.backtrace)[0..10].join("\n") # Get only the top 10 because there are many traces.
         }
         info
+      end
+
+      # ホスト名を取得。
+      #
+      # 下記理由から hostname(1) を使用:
+      #
+      # * job 実行環境では環境変数 HOSTNAME がセットされていないケースがある
+      #   (例: 通常の god 起動の場合。他方、container 起動の場合は
+      #   HOSTNAME がセットされている模様)。
+      # * hostname(1) は Linux Standard Base 共通コマンドのため必ず存在する。
+      #   @see https://refspecs.linuxfoundation.org/LSB_5.0.0/LSB-Common/LSB-Common/rcommands.html
+      def hostname
+        @hostname ||= (`hostname`.chomp rescue '(unknown)')
       end
 
     end
