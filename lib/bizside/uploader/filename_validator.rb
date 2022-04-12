@@ -8,7 +8,7 @@ module Bizside
       end
       
       def invalid_filename_regexp
-        CarrierWave::SanitizedFile.sanitize_regexp
+        CARRIERWAVE_SANITIZE_REGEXP
       end
     
       private
