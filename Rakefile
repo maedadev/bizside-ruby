@@ -16,7 +16,7 @@ task :test do
   ]
 
   Dir.chdir('bizside_test_app') do
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       fail unless system commands.join(' && ')
     end
   end
