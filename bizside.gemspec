@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ltsv', '~> 0.1'
   s.add_runtime_dependency 'mimemagic', '~> 0.3.10'
   s.add_runtime_dependency 'mime-types', '~> 3.1'
-  s.add_runtime_dependency 'rake', '~> 12.3'
+  s.add_runtime_dependency 'rake', '>= 12.3', '< 14.0'
 
   s.add_development_dependency 'RedCloth', '~> 4.2'
   s.add_development_dependency 'capybara', '~> 3.0', '< 3.2'
@@ -43,5 +43,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails', '>= 5.0.0', '< 6.0.0'
   s.add_development_dependency 'resque', '>= 1.27', '< 3.0.0'
   s.add_development_dependency 'rmagick', '>= 4.2.3', '< 5.0.0'
-  s.add_development_dependency 'sqlite3', '~> 1.3', '< 1.4.0'
+  s.add_development_dependency 'sqlite3', '>= 1.3', '< 1.5.0'
 end
