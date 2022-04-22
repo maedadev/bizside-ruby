@@ -12,13 +12,12 @@ jobs:
         ruby-version: [2.5, 2.6, 2.7]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-      - name: Install dependencies
-        run: bundle install -j2 --quiet --without=itamae
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Install gem
         run: bundle exec rake install
       - name: Set up test app
