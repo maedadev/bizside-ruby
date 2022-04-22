@@ -13,7 +13,7 @@ class AttachmentFileTest < ActiveSupport::TestCase
 
     assert_not Bizside.config.file_uploader.ignore_long_filename_error?
     assert_raise Errno::ENAMETOOLONG do
-      af = AttachmentFile.new(file: file)
+      AttachmentFile.new(file: file)
     end
 
     Bizside.config['file_uploader'] = {'ignore_long_filename_error' => true}
