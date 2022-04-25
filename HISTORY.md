@@ -1,3 +1,20 @@
+## main
+
+## 2.0.8
+  * 依存ライブラリのバージョン更新([PR#18](https://github.com/maedadev/bizside-ruby/pull/18))
+    * runtime_dependency
+      * rake
+        * 13.x を許可
+    * development_dependency
+      * sqlite3
+        * 1.4.x を許可
+      * capybara
+        * 3.35.x を許可
+      * cucumber
+        * 7.x を使う
+  * CI アップデート([PR#17](https://github.com/maedadev/bizside-ruby/pull/17))
+  * リファクタリング([PR#19](https://github.com/maedadev/bizside-ruby/pull/1))
+
 ## 2.0.7
   * job_audit.log 出力に server_address を追加
 
