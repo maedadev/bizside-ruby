@@ -56,7 +56,7 @@ module Bizside
       assert_equal 'dummy',       t.itamae_conf('db.username')
 
       # ERBは評価されている
-      assert_match /^\d+$/,       t.itamae_conf('db.pool').to_s
+      assert_match(/^\d+$/,       t.itamae_conf('db.pool').to_s)
 
       ENV['ROLE'] = nil
     end
@@ -106,9 +106,9 @@ module Bizside
     def test_itamae_conf_work_without_add_on_name
       ENV['ITAMAE_CONFS'] = nil
 
-      assert_match /hanaita.yml$/,  Bizside::ItamaeConf.conf_files[0]
-      assert_match /itamae.yml$/,   Bizside::ItamaeConf.conf_files[1]
-      assert_match /database.yml$/, Bizside::ItamaeConf.conf_files[2]
+      assert_match(/hanaita\.yml$/,  Bizside::ItamaeConf.conf_files[0])
+      assert_match(/itamae\.yml$/,   Bizside::ItamaeConf.conf_files[1])
+      assert_match(/database\.yml$/, Bizside::ItamaeConf.conf_files[2])
     end
 
     def test_set_itamae_conf

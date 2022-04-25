@@ -2,12 +2,10 @@ lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
 require 'bizside/version'
-require 'date'
 
 Gem::Specification.new do |s|
   s.name        = 'bizside'
   s.version     = Bizside::VERSION
-  s.date        = Date.today
   s.summary     = 'Bizside is an utilities for web application.'
   s.description = 'Bizside is an utilities to assist building web application.'
   s.authors     = ['bizside-developers']

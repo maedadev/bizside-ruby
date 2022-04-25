@@ -40,7 +40,7 @@ class ActionView::TemplateRenderer
           options[:template] = option_for_template + '.' + priority
           ret = determine_template(options)
           break
-        rescue ActionView::MissingTemplate => e
+        rescue ActionView::MissingTemplate
         end
       end
     end

@@ -10,7 +10,7 @@ module Bizside
           require 'carrierwave-magic'
           include CarrierWave::Magic
           process :set_magic_content_type => true
-        rescue => e
+        rescue
           raise '[Bizside.gem ERROR] you need to add carrierwave-magic.gem.'
         end
         before :cache, :validate_content_type!

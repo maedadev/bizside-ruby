@@ -176,7 +176,7 @@ end
 
 def self.ask_env(env_key, options = {})
   cache_file = 'tmp/cache/env'
-  cache = File.exists?(cache_file) ? YAML.load_file(cache_file) : {}
+  cache = File.exist?(cache_file) ? YAML.load_file(cache_file) : {}
 
   if options.fetch(:cache, false)
     options = options.merge(default: cache.fetch(env_key, options[:default]))
@@ -190,7 +190,7 @@ def self.ask_env(env_key, options = {})
     cache[env_key] = ENV[env_key]
     File.write(cache_file, YAML.dump(cache))
   else
-    if File.exists?(cache_file) and cache[env_key]
+    if File.exist?(cache_file) and cache[env_key]
       cache.delete(env_key)
       File.write(cache_file, YAML.dump(cache))
     end
