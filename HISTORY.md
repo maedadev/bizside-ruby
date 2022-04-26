@@ -1,4 +1,9 @@
 ## main
+  * 依存ライブラリのバージョン更新
+    * development_dependency
+      * cucumber-rails
+        * 2.x を使う
+        * cucumber のバージョンに合わせる
 
 ## 2.0.8
   * 依存ライブラリのバージョン更新([PR#18](https://github.com/maedadev/bizside-ruby/pull/18))

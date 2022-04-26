@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'RedCloth', '~> 4.2'
   s.add_development_dependency 'capybara', '~> 3.0', '< 3.36'
   s.add_development_dependency 'cucumber', '~> 7.1'
-  s.add_development_dependency 'cucumber-rails', '~> 1.4'
+  s.add_development_dependency 'cucumber-rails', '~> 2.5'
   s.add_development_dependency 'devise', '>= 3.4.0', '< 5.0.0'
   s.add_development_dependency 'email_validator', '1.5.0'
   s.add_development_dependency 'ipaddress', '~> 0.8'
