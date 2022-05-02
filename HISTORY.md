@@ -1,5 +1,5 @@
 ## main
-  * 依存ライブラリのバージョン更新
+  * 依存ライブラリのバージョン更新([PR#20](https://github.com/maedadev/bizside-ruby/pull/20))
     * development_dependency
       * cucumber-rails
         * 2.x を使う
