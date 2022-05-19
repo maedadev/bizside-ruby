@@ -9,7 +9,7 @@ module Bizside
       chars += ('A'..'Z').to_a if case_sensitive
       chars_length = chars.length
 
-      length.times.map { chars[rand(chars_length)] }.join
+      Array.new(length) { chars[rand(chars_length)] }.join
     end
 
     def self.create_random_string(number)
