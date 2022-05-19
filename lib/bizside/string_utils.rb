@@ -7,7 +7,9 @@ module Bizside
     def self.create_random_alpha_string length, case_sensitive = false
       chars = ('a'..'z').to_a
       chars += ('A'..'Z').to_a if case_sensitive
-      chars.sample(length).join
+      chars_length = chars.length
+
+      Array.new(length) { chars[rand(chars_length)] }.join
     end
 
     def self.create_random_string(number)
