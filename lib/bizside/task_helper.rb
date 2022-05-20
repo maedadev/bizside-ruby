@@ -203,7 +203,7 @@ def self.yes_confirmed?(yes_value, options = {})
   ret = Bizside::Yes.confirmed?(yes_value)
   if ret.nil?
     if options[:fail_on_error]
-      fail "yes/no または true/false 形式で入力してください。answer=#{answer}"
+      fail "yes/no または true/false 形式で入力してください。answer=#{yes_value}"
     else
       ret = false
     end
