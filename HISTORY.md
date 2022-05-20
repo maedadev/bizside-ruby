@@ -1,4 +1,8 @@
 ## main
+  * yes_confirmed? のオプション(fail_on_error)のバグを修正([PR#22](https://github.com/maedadev/bizside-ruby/pull/22))
+    * 定義済の変数を参照するように修正
+  * StringUtils.create_random_alpha_string の生成する文字の上限を廃止([PR#21](https://github.com/maedadev/bizside-ruby/pull/21))
+    * 半角英小文字のみの場合は26文字、半角英大文字・小文字の場合は52文字を超える文字を生成出来るように修正
   * 依存ライブラリのバージョン更新([PR#20](https://github.com/maedadev/bizside-ruby/pull/20))
     * development_dependency
       * cucumber-rails
