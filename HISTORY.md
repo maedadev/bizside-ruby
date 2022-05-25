@@ -71,3 +71,6 @@
 
 ## 2.0.0
   * OSSとして公開(https://github.com/maedadev/bizside-ruby)
+
+    バージョン 1系では Railsアプリ以外で bizside.gem を使用する時は config/bizside.yml は任意でした。
+    バージョン 2系以降では常に config/bizside.yml が必須になります。
