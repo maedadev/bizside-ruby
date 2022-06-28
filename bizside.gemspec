@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'carrierwave', '~> 2.2'
   s.add_runtime_dependency 'carrierwave-magic', '~> 0.0.4'
   s.add_runtime_dependency 'fog-aws', '~> 3.0'
-  s.add_runtime_dependency 'faraday', '~> 1.9.3'
+  s.add_runtime_dependency 'faraday', '>= 0.12', '< 2.0.0'
   s.add_runtime_dependency 'ltsv', '~> 0.1'
   s.add_runtime_dependency 'mimemagic', '~> 0.3.10'
   s.add_runtime_dependency 'mime-types', '~> 3.1'
