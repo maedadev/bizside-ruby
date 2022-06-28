@@ -18,6 +18,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Prepare for test
+        run: sudo mkdir -p /data/ && sudo chmod 777 /data/
       - name: Install gem
         run: bundle exec rake install
       - name: Set up test app
