@@ -1,5 +1,5 @@
 ## 2.1.0
-  * faraday version up 0.12 => 1.9.3(#62048)
+  * faraday 1.x.xまで許可(#62048)
 
 ## 2.0.9
   * yes_confirmed? のオプション(fail_on_error)のバグを修正([PR#22](https://github.com/maedadev/bizside-ruby/pull/22))
