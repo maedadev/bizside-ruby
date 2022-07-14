@@ -1,3 +1,6 @@
+## master
+  * Railsのログを log/[Rails.env].log に加え、標準出力にも出力するためのミドルウェア Bizside::StdoutLogger を追加
+
 ## 2.1.0
   * 依存ライブラリのバージョン更新
     * faraday 1.x.xまで許可(#62048)
