@@ -1,4 +1,4 @@
-## master
+## 2.1.1
   * Railsのログを log/[Rails.env].log に加え、標準出力にも出力するためのミドルウェア Bizside::StdoutLogger を追加
 
 ## 2.1.0
