@@ -1,5 +1,8 @@
+## 2.1.2
+  * require 'bizside' で Bizside::StdoutLogger をロードするように修正([PR#33](https://github.com/maedadev/bizside-ruby/pull/33))
+
 ## 2.1.1
-  * Railsのログを log/[Rails.env].log に加え、標準出力にも出力するためのミドルウェア Bizside::StdoutLogger を追加
+  * Railsのログを log/[Rails.env].log に加え、標準出力にも出力するためのミドルウェア Bizside::StdoutLogger を追加([PR#31](https://github.com/maedadev/bizside-ruby/pull/31))
 
 ## 2.1.0
   * 依存ライブラリのバージョン更新
