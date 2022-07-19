@@ -75,6 +75,7 @@ require 'bizside/user_agent' if Bizside.config.user_agent.enabled?
 require 'bizside/file_converter' if Bizside.config.jod_converter.enabled?
 
 require 'bizside/audit_log'
+require 'bizside/stdout_logger'
 require 'bizside/show_exceptions'
 
 if defined?(Rails)
