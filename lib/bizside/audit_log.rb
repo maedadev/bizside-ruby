@@ -3,8 +3,10 @@ require_relative 'audit/logger'
 module Bizside
   class AuditLog
 
-    def self.ignored_paths=(path)
-      @@ignored_paths = path
+    @@ignore_paths = []
+
+    def self.ignore_paths=(paths)
+      @@ignore_paths = paths
     end
 
 
@@ -22,7 +24,7 @@ module Bizside
         return @status, @headers, @response
       end
 
-      if @@ignored_paths.any? do |path|
+      if @@ignore_paths.any? do |path|
           case path
           when Regexp
             env['REQUEST_URI'] =~ path
