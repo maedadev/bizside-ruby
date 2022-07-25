@@ -3,6 +3,11 @@ require_relative 'audit/logger'
 module Bizside
   class AuditLog
 
+    def self.ignored_paths=(path)
+      @@ignored_paths = path
+    end
+
+
     def initialize(app)
       @app = app
     end
@@ -14,6 +19,17 @@ module Bizside
       exception = env[Bizside::ShowExceptions::BIZSIDE_EXCEPTION_ENV_KEY]
 
       if env['BIZSIDE_SUPPRESS_AUDIT']
+        return @status, @headers, @response
+      end
+
+      if @@ignored_paths.any? do |path|
+          case path
+          when Regexp
+            env['REQUEST_URI'] =~ path
+          else
+            env['REQUEST_URI'] == path
+          end
+        end
         return @status, @headers, @response
       end
 
