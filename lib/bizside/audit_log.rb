@@ -5,8 +5,8 @@ module Bizside
 
     @@ignore_paths = []
 
-    def self.ignore_paths=(paths)
-      @@ignore_paths = paths
+    def self.ignore_paths
+      @@ignore_paths
     end
 
 
