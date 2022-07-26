@@ -1,3 +1,7 @@
+## 2.1.3
+  * BIZSIDE_SUPPRESS_AUDIT変数を設定できない場合(Engine等)でもAuditLogを抑制可能とする([PR#36](https://github.com/maedadev/bizside-ruby/pull/36))
+    * AuditLogを抑制したいURIパスをBizside::AuditLog.ignored_pathsに指定する
+
 ## 2.1.2
   * require 'bizside' で Bizside::StdoutLogger をロードするように修正([PR#33](https://github.com/maedadev/bizside-ruby/pull/33))
 
