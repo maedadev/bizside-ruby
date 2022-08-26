@@ -1,4 +1,5 @@
 require 'carrierwave'
+require 'securerandom'
 
 # 日本語ファイル名のまま保存
 CARRIERWAVE_SANITIZE_REGEXP = /[^[:word:]①-⑨【】「」（）・＆、　 \(\)\.\-\+]/
@@ -11,7 +12,10 @@ module Bizside
     attr_accessor :file_size
 
     def path
-      original_filename
+      # Return non-existent path to prevent any actual file/directory from being the target of copy or move
+      # because this class does not refer to any file.
+      # (CarrierWave::Uploader::Base#cache! tries to copy or move a passed file to its working directory)
+      File.join(CarrierWave.tmp_path, SecureRandom.uuid, File.basename(original_filename))
     end
   end
 end

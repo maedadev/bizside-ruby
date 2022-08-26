@@ -1,3 +1,7 @@
+## 2.1.4
+  * Bizside::CarrierwaveStringIO#path で実在するファイルを参照しないよう、必ず存在しないパスを返すように変更
+    * CarrierWave::Uploader::Base#store! で意図しないファイルが保存対象となるのを防ぐため
+
 ## 2.1.3
   * BIZSIDE_SUPPRESS_AUDIT変数を設定できない場合(Engine等)でもAuditLogを抑制可能とする([PR#36](https://github.com/maedadev/bizside-ruby/pull/36))
     * AuditLogを抑制したいURIパスをBizside::AuditLog.ignored_pathsに指定する
