@@ -1,3 +1,9 @@
+## 2.1.5
+  * email_valiadator を廃止
+  
+    長らく https://github.com/K-and-R/email_validator のラッパーとして存在していました。
+    直接上記Gemを利用して適切なオプションを利用してください。
+
 ## 2.1.4
   * Bizside::CarrierwaveStringIO#path で実在するファイルを参照しないよう、必ず存在しないパスを返すように変更
     * CarrierWave::Uploader::Base#store! で意図しないファイルが保存対象となるのを防ぐため

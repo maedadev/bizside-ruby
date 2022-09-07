@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber', '~> 7.1'
   s.add_development_dependency 'cucumber-rails', '~> 2.5'
   s.add_development_dependency 'devise', '>= 3.4.0', '< 5.0.0'
-  s.add_development_dependency 'email_validator', '1.5.0'
   s.add_development_dependency 'ipaddress', '~> 0.8'
   s.add_development_dependency 'rails', '>= 5.0.0', '< 6.0.0'
   s.add_development_dependency 'resque', '>= 1.27', '< 3.0.0'
