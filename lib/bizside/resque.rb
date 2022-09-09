@@ -22,7 +22,7 @@ require_relative 'audit/job_logger'
   
     case format
     when :yaml
-      resque_config = YAML.load(_resque_config)[Bizside.env]
+      resque_config = YAML.safe_load(_resque_config)[Bizside.env]
     when :json
       resque_config = ActiveSupport::JSON.decode(_resque_config)[Bizside.env]
     else
