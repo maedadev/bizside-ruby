@@ -18,18 +18,24 @@ require_relative 'audit/job_logger'
     resque_file = File.join(File.expand_path(ENV['RAILS_ROOT'] || '.'), file)
     next unless File.exist?(resque_file)
 
-    resque_config = ERB.new(File.read(resque_file), 0, '-').result
+    _resque_config = ERB.new(File.read(resque_file), 0, '-').result
   
     case format
     when :yaml
-      Resque.redis = YAML.load(resque_config)[Bizside.env]
-      break
+      resque_config = YAML.safe_load(_resque_config)[Bizside.env]
     when :json
-      Resque.redis = ActiveSupport::JSON.decode(resque_config)[Bizside.env]
-      break
+      resque_config = ActiveSupport::JSON.decode(_resque_config)[Bizside.env]
     else
       raise "不正なResque設定ファイルです。#{file}"
     end
+
+    if resque_config.is_a?(Hash)
+      # redis config keys must be symbol
+      resque_config = JSON.parse(resque_config.to_json, symbolize_names: true)
+    end
+
+    Resque.redis = resque_config
+    break
   end
 end
 
