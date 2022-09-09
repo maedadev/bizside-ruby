@@ -1,3 +1,8 @@
+## 2.1.6
+  * bizside/resque
+    * resque の設定値として String だけでなく Hash にも対応
+    * resque.yml/redis.yml は YAML.load でなく YAML.safe_load でロードするように修正
+
 ## 2.1.5
   * email_valiadator を廃止
   
