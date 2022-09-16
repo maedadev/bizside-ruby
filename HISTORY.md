@@ -4,7 +4,7 @@
     * resque.yml/redis.yml は YAML.load でなく YAML.safe_load でロードするように修正
 
 ## 2.1.5
-  * email_valiadator を廃止
+  * email_validator を廃止
   
     長らく https://github.com/K-and-R/email_validator のラッパーとして存在していました。
     直接上記Gemを利用して適切なオプションを利用してください。
