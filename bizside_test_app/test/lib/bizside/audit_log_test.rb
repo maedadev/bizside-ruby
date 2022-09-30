@@ -19,4 +19,14 @@ class Bizside::AuditLogTest < ActiveSupport::TestCase
     loginfo = middleware.send(:build_loginfo, new_env, start, stop, 200, nil)
     assert_equal 'https://env.example.com/path/to/action?key=999&api_key=yyyy', loginfo[:request_uri]
   end
+
+  def test_detect_exception_backtrace_truncate_length
+    al = Bizside::AuditLog.new(nil)
+    clazz = Struct.new(:backtrace)
+
+    ex = clazz.new(['a' * 8190, 'b', 'c']) # デフォルト上限の 8192 文字分の配列
+    expected = 'a' * 8190 + "\nb\n"
+    assert_equal expected, al.__send__(:detect_exception_backtrace, ex), '改行文字で結合する分が切り落とされていること'
+  end
+
 end

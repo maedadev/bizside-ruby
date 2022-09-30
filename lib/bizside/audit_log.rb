@@ -166,10 +166,10 @@ module Bizside
       exception.to_s
     end
 
-    def detect_exception_backtrace(exception)
+    def detect_exception_backtrace(exception, truncate_length: 8192)
       return '' unless exception
 
-      exception.backtrace.join("\n")
+      exception.backtrace.join("\n")[0..truncate_length]
     end
 
   end
