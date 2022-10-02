@@ -19,4 +19,23 @@ class Bizside::AuditLogTest < ActiveSupport::TestCase
     loginfo = middleware.send(:build_loginfo, new_env, start, stop, 200, nil)
     assert_equal 'https://env.example.com/path/to/action?key=999&api_key=yyyy', loginfo[:request_uri]
   end
+
+  def test_detect_exception_backtrace_truncate_length
+    al = Bizside::AuditLog.new(nil)
+    clazz = Struct.new(:backtrace)
+    ex = clazz.new(['a' * 8190, 'b', 'c']) # デフォルト上限の 8192 文字分の配列
+
+    expected = 'a' * 8190 + "\nb"
+    assert_equal expected, al.__send__(:detect_exception_backtrace, ex), '改行文字で結合する分が切り落とされていること'
+    expected = 'a' * 8190 + "\nb\nc"
+    assert_equal expected, al.__send__(:detect_exception_backtrace, ex, truncate_length: 8194), '改行文字分も考慮して指定すると切り落とされないこと'
+
+    Bizside::AuditLog.truncate_length = 1
+
+    expected = 'a'
+    assert_equal expected, al.__send__(:detect_exception_backtrace, ex), 'Bizside::AuditLog全体として指定した truncate_length に準じていること'
+    expected = 'aaaa'
+    assert_equal expected, al.__send__(:detect_exception_backtrace, ex, truncate_length: 4), 'Bizside::AuditLog全体として指定した truncate_length より引数を優先すること'
+  end
+
 end

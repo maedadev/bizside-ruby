@@ -4,11 +4,19 @@ module Bizside
   class AuditLog
 
     @@ignore_paths = []
+    @@truncate_length = 8192
 
     def self.ignore_paths
       @@ignore_paths
     end
 
+    def self.truncate_length
+      @@truncate_length
+    end
+
+    def self.truncate_length=(value)
+      @@truncate_length = value
+    end
 
     def initialize(app)
       @app = app
@@ -166,10 +174,10 @@ module Bizside
       exception.to_s
     end
 
-    def detect_exception_backtrace(exception)
+    def detect_exception_backtrace(exception, truncate_length: @@truncate_length)
       return '' unless exception
 
-      exception.backtrace.join("\n")
+      exception.backtrace.join("\n")[0...truncate_length]
     end
 
   end
