@@ -1,6 +1,11 @@
+## 2.1.8
+  * Bizside::AuditLog
+
+    監査ログに出力する際の文字数の制限を、例外メッセージをにも反映([PR#39](https://github.com/maedadev/bizside-ruby/pull/41))
+
 ## 2.1.7
   * Bizside::AuditLog
-  
+
     バックトレースを監査ログに出力する際に、文字数の制限を追加([PR#39](https://github.com/maedadev/bizside-ruby/pull/40))
     デフォルトでは 8192 文字分の出力に制限されます。
     Bizside::AuditLog.truncate_length の値を変更することで調整が可能です。
@@ -12,7 +17,7 @@
 
 ## 2.1.5
   * email_validator を廃止
-  
+
     長らく https://github.com/K-and-R/email_validator のラッパーとして存在していました。
     直接上記Gemを利用して適切なオプションを利用してください。
 
