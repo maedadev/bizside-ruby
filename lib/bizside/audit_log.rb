@@ -168,10 +168,10 @@ module Bizside
       exception.class.name
     end
 
-    def detect_exception_message(exception)
+    def detect_exception_message(exception, truncate_length: @@truncate_length)
       return '' unless exception
 
-      exception.to_s
+      exception.to_s[0...truncate_length]
     end
 
     def detect_exception_backtrace(exception, truncate_length: @@truncate_length)

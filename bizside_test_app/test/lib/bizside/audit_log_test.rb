@@ -2,6 +2,14 @@ require 'test_helper'
 
 class Bizside::AuditLogTest < ActiveSupport::TestCase
 
+  def setup
+    @_truncate_length_default = Bizside::AuditLog.truncate_length
+  end
+
+  def teardown
+    Bizside::AuditLog.truncate_length = @_truncate_length_default
+  end
+
   def test_build_loginfoメソッド_request_uriにはBIZSIDE_REQUEST_URIが優先的に設定される
     request_uri = 'https://app.example.com/path/to/action?id=000&api_key=xxxx'
     env = Rack::MockRequest.env_for(request_uri, method: 'GET')
@@ -36,6 +44,18 @@ class Bizside::AuditLogTest < ActiveSupport::TestCase
     assert_equal expected, al.__send__(:detect_exception_backtrace, ex), 'Bizside::AuditLog全体として指定した truncate_length に準じていること'
     expected = 'aaaa'
     assert_equal expected, al.__send__(:detect_exception_backtrace, ex, truncate_length: 4), 'Bizside::AuditLog全体として指定した truncate_length より引数を優先すること'
+  end
+
+  def test_detect_exception_message_truncate_length
+    al = Bizside::AuditLog.new(nil)
+    ex = RuntimeError.new('a' * 8194) # デフォルト上限の 8192 + 2文字分
+
+    assert_equal ('a' * 8192), al.__send__(:detect_exception_message, ex), '上限値以上が切り落とされていること'
+
+    Bizside::AuditLog.truncate_length = 1
+
+    assert_equal 'a', al.__send__(:detect_exception_message, ex), 'Bizside::AuditLog全体として指定した truncate_length に準じていること'
+    assert_equal 'aaaa', al.__send__(:detect_exception_message, ex, truncate_length: 4), 'Bizside::AuditLog全体として指定した truncate_length より引数を優先すること'
   end
 
 end
