@@ -1,3 +1,13 @@
+## main
+  * Bizside::JobUtils
+
+    * RAILS_ENV=test 時の挙動を本来の Resque の挙動となるべく揃えるように修正
+      * Resque がサポートしている hook として before_enqueue 以外の hook も実行
+        https://github.com/resque/resque/blob/master/docs/HOOKS.md#job-hooks
+        * NOTE: `HOOKNAME_IDENTIFIER` の形式は未対応のまま
+      * before_enqueue の戻り値の false と nil を区別
+      * キューに登録された際の引数の Hash のキーを String に変換
+
 ## 2.1.8
   * Bizside::AuditLog
 
