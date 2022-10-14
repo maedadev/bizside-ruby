@@ -36,7 +36,7 @@ end
 group :test do
   gem 'RedCloth'
   gem 'database_cleaner'
-  gem 'minitest'
+  gem 'minitest', '~> 5.15.0'
   gem 'minitest-rails'
   gem 'minitest-reporters'
   gem 'puma'

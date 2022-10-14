@@ -9,12 +9,7 @@ module Bizside
 
     def self.add_job_to(queue, klass, *args)
       if Bizside.rails_env&.test?
-        if klass.respond_to?(:before_enqueue)
-          return unless klass.before_enqueue(*args)
-        end
-
-        Bizside.logger.info "テスト時にはジョブの登録を行わず、即時実行します。"
-        klass.perform(*args)
+        do_perform_and_hooks_instantly(klass, 'テスト時にはジョブの登録を行わず、即時実行します。', *args)
         return
       end
 
@@ -49,12 +44,7 @@ module Bizside
 
     def self.enqueue_at_with_queue(queue, time, klass, *args)
       if Bizside.rails_env&.test?
-        if klass.respond_to?(:before_enqueue)
-          return unless klass.before_enqueue(*args)
-        end
-
-        Bizside.logger.info "テスト時には遅延ジョブの登録を行わず、即時実行します。"
-        klass.perform(*args)
+        do_perform_and_hooks_instantly(klass, 'テスト時には遅延ジョブの登録を行わず、即時実行します。', *args)
         return
       end
 
@@ -84,12 +74,7 @@ module Bizside
 
     def self.set_job_at(time, klass, *args)
       if Bizside.rails_env&.test?
-        if klass.respond_to?(:before_enqueue)
-          return unless klass.before_enqueue(*args)
-        end
-
-        Bizside.logger.info "テスト時には遅延ジョブの登録を行わず、即時実行します。"
-        klass.perform(*args)
+        do_perform_and_hooks_instantly(klass, 'テスト時には遅延ジョブの登録を行わず、即時実行します。', *args)
         return
       end
 
@@ -214,7 +199,11 @@ module Bizside
 
     def self.dequeue(klass, *args)
       if Bizside.rails_env&.test?
+        if klass.respond_to?(:before_dequeue)
+          return if klass.before_dequeue(*args) == false
+        end
         Bizside.logger.info 'テスト時にジョブの削除は行いません。'
+        klass.after_dequeue(*args) if klass.respond_to?(:after_dequeue)
         return
       end
 
@@ -316,5 +305,65 @@ module Bizside
       ::Resque::Failure.count(queue, class_name)
     end
 
+    def self.do_perform_and_hooks_instantly(klass, log_message, *args)
+      begin
+        if klass.respond_to?(:before_enqueue)
+          return if klass.before_enqueue(*args) == false
+        end
+      rescue
+        # should not propagate to on_failure(job code)
+        raise
+      end
+      error_after_queue = nil
+      args_to_enqueue = Marshal.load(Marshal.dump(args)) # deep copy
+      begin
+        klass.after_enqueue(*args) if klass.respond_to?(:after_enqueue)
+      rescue => e
+        # should propagate only to code that enqueued the job
+        error_after_queue = e
+      end
+
+      args = stringify_keys(args_to_enqueue)
+
+      begin
+        begin
+          klass.before_perform(*args) if klass.respond_to?(:before_perform)
+        rescue ::Resque::Job::DontPerform
+          return
+        end
+
+        perform = -> do
+          Bizside.logger.info log_message
+          klass.perform(*args)
+        end
+        if klass.respond_to?(:around_perform)
+          klass.around_perform(*args, &perform)
+        else
+          perform.call
+        end
+
+        klass.after_perform(*args) if klass.respond_to?(:after_perform)
+      rescue => e
+        klass.on_failure(e, *args) if klass.respond_to?(:on_failure)
+        raise
+      ensure
+        raise error_after_queue if error_after_queue
+      end
+    end
+    private_class_method :do_perform_and_hooks_instantly
+
+    def self.stringify_keys(object)
+      case object
+      when Hash
+        object.map {|k, v| [stringify_keys(k), stringify_keys(v)]}.to_h
+      when Array
+        object.map {|v| stringify_keys(v)}
+      when Symbol
+        object.to_s
+      else
+        object
+      end
+    end
+    private_class_method :stringify_keys
   end
 end
