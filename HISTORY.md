@@ -1,4 +1,4 @@
-## main
+## 2.1.9
   * Bizside::JobUtils
 
     * RAILS_ENV=test 時の挙動を本来の Resque の挙動となるべく揃えるように修正
