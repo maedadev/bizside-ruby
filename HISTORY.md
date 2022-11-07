@@ -1,3 +1,11 @@
+## main
+  * bizside/carrierwave
+
+    * fog_public=false の時 CarrierWave+Fog でACLで private を指定する代わりにACL未指定でアップロードするパッチを適用
+      * S3でのACLは無効化が推奨されており、ACLが無効化された別アカウント上のバケットに対しては、
+        ACLをprivateに指定してファイルアップロードしてもエラーとなる。
+      * ACL未指定時はエラーとならず、その場合 private が適用される。
+
 ## 2.1.9
   * Bizside::JobUtils
 
