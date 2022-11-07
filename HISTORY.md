@@ -1,4 +1,4 @@
-## main
+## 2.1.10
   * bizside/carrierwave
 
     * fog_public=false の時 CarrierWave+Fog でACLで private を指定する代わりにACL未指定でアップロードするパッチを適用
