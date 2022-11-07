@@ -47,6 +47,66 @@ CarrierWave.configure do |config|
     config.fog_directory = Bizside.config.storage.fog.container
     config.fog_public = false
     config.storage = :fog
+
+    # Patch to not set ACLs to 'private' if fog_public is false.
+    # Requests to set/update ACLs fail if ACL is disabled.
+    # Setting 'private' to ACLs also fails when the bucket is not in the same account as IAM user/role.
+    # 'private' is applied by default so there's no need to set 'private' explicitly.
+    module CarrierWave
+      module Storage
+        class Fog
+          class File
+            def acl_header
+              if fog_provider == 'AWS'
+                @uploader.fog_public ? { 'x-amz-acl' => 'public-read' } : {}
+              elsif fog_provider == "Google"
+                @uploader.fog_public ? { destination_predefined_acl: "publicRead" } : {}
+              else
+                {}
+              end
+            end
+          end
+        end
+      end
+    end
+
+    require 'fog/aws/models/storage/directory'
+
+    module Fog
+      module AWS
+        class Storage
+          class Directory < Fog::Model
+            def public=(new_public)
+              if new_public
+                @acl = 'public-read'
+              else
+                @acl = nil
+              end
+              new_public
+            end
+          end
+        end
+      end
+    end
+
+    require 'fog/aws/models/storage/file'
+
+    module Fog
+      module AWS
+        class Storage
+          class File < Fog::Model
+            def public=(new_public)
+              if new_public
+                @acl = 'public-read'
+              else
+                @acl = nil
+              end
+              new_public
+            end
+          end
+        end
+      end
+    end
   end
 
 end
