@@ -1,3 +1,8 @@
+## 2.1.11
+  * Bizside::JobUtils
+
+    * 遅延ジョブの情報取得メソッドを追加。
+
 ## 2.1.10
   * bizside/carrierwave
 
