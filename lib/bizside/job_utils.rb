@@ -63,6 +63,42 @@ module Bizside
       end
     end
 
+    def self.delayed_queue_peek(start, count)
+      if Bizside.rails_env&.test?
+        Rails.logger.info "テスト時には遅延ジョブの一覧を返しません。"
+        return []
+      end
+
+      ::Resque.delayed_queue_peek(start, count)
+    end
+
+    def self.delayed_queue_schedule_size
+      if Bizside.rails_env&.test?
+        Rails.logger.info "テスト時には遅延ジョブの数を返しません。"
+        return 0
+      end
+
+      ::Resque.delayed_queue_schedule_size
+    end
+
+    def self.delayed_timestamp_peek(timestamp, start, count)
+      if Bizside.rails_env&.test?
+        Rails.logger.info "テスト時には指定された時間の遅延ジョブの一覧を返しません。"
+        return []
+      end
+
+      ::Resque.delayed_timestamp_peek(timestamp, start, count)
+    end
+
+    def self.delayed_timestamp_size(timestamp)
+      if Bizside.rails_env&.test?
+        Rails.logger.info "テスト時には指定された時間の遅延ジョブの数を返しません。"
+        return 0
+      end
+
+      ::Resque.delayed_timestamp_size(timestamp)
+    end
+
     def self.remove_delayed_in_queue(klass, queue, *args)
       if Bizside.rails_env&.test?
         Rails.logger.info "テスト時には遅延ジョブのキャンセルを行いません。"
