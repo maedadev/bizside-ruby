@@ -359,28 +359,26 @@ module Bizside
         error_after_queue = e
       end
 
-      args = stringify_keys(args_to_enqueue)
-
       begin
         begin
-          klass.before_perform(*args) if klass.respond_to?(:before_perform)
+          klass.before_perform(*args_to_enqueue) if klass.respond_to?(:before_perform)
         rescue ::Resque::Job::DontPerform
           return
         end
 
         perform = -> do
           Bizside.logger.info log_message
-          klass.perform(*args)
+          klass.perform(*args_to_enqueue)
         end
         if klass.respond_to?(:around_perform)
-          klass.around_perform(*args, &perform)
+          klass.around_perform(*args_to_enqueue, &perform)
         else
           perform.call
         end
 
-        klass.after_perform(*args) if klass.respond_to?(:after_perform)
+        klass.after_perform(*args_to_enqueue) if klass.respond_to?(:after_perform)
       rescue => e
-        klass.on_failure(e, *args) if klass.respond_to?(:on_failure)
+        klass.on_failure(e, *args_to_enqueue) if klass.respond_to?(:on_failure)
         raise
       ensure
         raise error_after_queue if error_after_queue
@@ -388,18 +386,5 @@ module Bizside
     end
     private_class_method :do_perform_and_hooks_instantly
 
-    def self.stringify_keys(object)
-      case object
-      when Hash
-        object.map {|k, v| [stringify_keys(k), stringify_keys(v)]}.to_h
-      when Array
-        object.map {|v| stringify_keys(v)}
-      when Symbol
-        object.to_s
-      else
-        object
-      end
-    end
-    private_class_method :stringify_keys
   end
 end
