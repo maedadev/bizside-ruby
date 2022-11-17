@@ -351,7 +351,7 @@ module Bizside
         raise
       end
       error_after_queue = nil
-      args_to_enqueue = Marshal.load(Marshal.dump(args)) # deep copy
+      args_to_enqueue = MultiJson.load(MultiJson.dump(args)) # deep copy
       begin
         klass.after_enqueue(*args) if klass.respond_to?(:after_enqueue)
       rescue => e

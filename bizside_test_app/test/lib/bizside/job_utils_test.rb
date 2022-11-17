@@ -198,7 +198,7 @@ class Bizside::JobUtilsTest < ActiveSupport::TestCase
         assert_equal({foo: 1, bar: {baz: 2}, 3 => 4}, options)
       end
       mock.expect(:perform, nil) do |options|
-        assert_equal({'foo' => 1, 'bar' => {'baz' => 2}, 3 => 4}, options)
+        assert_equal({'foo' => 1, 'bar' => {'baz' => 2}, "3" => 4}, options)
       end
 
       Bizside::JobUtils.send(test_method, *(extra_args + [mock, original_options]))

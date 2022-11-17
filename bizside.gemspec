@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ltsv', '~> 0.1'
   s.add_runtime_dependency 'mimemagic', '~> 0.3.10'
   s.add_runtime_dependency 'mime-types', '~> 3.1'
+  s.add_runtime_dependency 'multi_json', '~> 1.15'
   s.add_runtime_dependency 'rake', '>= 12.3', '< 14.0'
 
   s.add_development_dependency 'RedCloth', '~> 4.2'
