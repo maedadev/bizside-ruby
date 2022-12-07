@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.5.0'
 
-  s.add_runtime_dependency 'activesupport', '>= 5.0.0', '< 6.0.0'
+  s.add_runtime_dependency 'activesupport', '>= 5.0.0', '< 7.0.0'
   s.add_runtime_dependency 'aws-sdk-s3', '~> 1.94'
   s.add_runtime_dependency 'capistrano', '< 3.0.0'
   s.add_runtime_dependency 'carrierwave', '~> 2.2'
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber-rails', '~> 2.5'
   s.add_development_dependency 'devise', '>= 3.4.0', '< 5.0.0'
   s.add_development_dependency 'ipaddress', '~> 0.8'
-  s.add_development_dependency 'rails', '>= 5.0.0', '< 6.0.0'
+  s.add_development_dependency 'rails', '>= 5.0.0', '< 7.0.0'
   s.add_development_dependency 'resque', '>= 1.27', '< 3.0.0'
   s.add_development_dependency 'rmagick', '>= 4.2.3', '< 5.0.0'
   s.add_development_dependency 'sqlite3', '>= 1.3', '< 1.5.0'

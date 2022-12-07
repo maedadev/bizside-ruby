@@ -5,11 +5,7 @@ module Bizside
 
       included do
         case Rails::VERSION::MAJOR
-        when 3
-          before_filter :detect_user_agent
-        when 4
-          before_action :detect_user_agent
-        when 5
+        when 5, 6
           before_action :detect_user_agent
         else
           raise "Rails-#{Rails::VERSION::MAJOR} は未対応です。"
