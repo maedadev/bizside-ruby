@@ -1,3 +1,6 @@
+## 2.2.0
+  * Rails 6.x をサポート
+
 ## 2.1.12
   * Bizside::JobUtils
 
