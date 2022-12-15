@@ -38,7 +38,7 @@
 ## 2.1.8
   * Bizside::AuditLog
 
-    監査ログに出力する際の文字数の制限を、例外メッセージをにも反映([PR#39](https://github.com/maedadev/bizside-ruby/pull/41))
+    監査ログに出力する際の文字数の制限を、例外メッセージにも反映([PR#39](https://github.com/maedadev/bizside-ruby/pull/41))
 
 ## 2.1.7
   * Bizside::AuditLog
