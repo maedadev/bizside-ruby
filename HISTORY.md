@@ -1,3 +1,8 @@
+## 2.2.1
+  * Validator 関連
+ 
+    * Rails 6.1 の ActiveModel::Error の変更に対応
+
 ## 2.2.0
   * Rails 6.x をサポート
 

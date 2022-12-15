@@ -14,7 +14,7 @@ class TelValidator < ActiveModel::EachValidator
     return if value.nil? or value.empty?
     
     unless validate_tel(record, value)
-      record.errors[attribute] << I18n.t('errors.messages.invalid')
+      record.errors.add(attribute, I18n.t('errors.messages.invalid'))
     end
   end
   

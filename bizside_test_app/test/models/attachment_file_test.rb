@@ -32,7 +32,7 @@ class AttachmentFileTest < ActiveSupport::TestCase
     assert Bizside.config.file_uploader.ignore_long_filename_error?
     af = AttachmentFile.new(file: file)
     assert af.invalid?
-    assert af.errors[:original_filename].any?, 'original_filename で入力エラーが発生していること'
+    assert af.errors.include?(:original_filename), 'original_filename で入力エラーが発生していること'
   end
 
 end

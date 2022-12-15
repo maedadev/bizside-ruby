@@ -1,0 +1,5 @@
+ja:
+  errors:
+    messages:
+      invalid: 'は正しくありません。'
+      zip: 'は郵便番号として正しくありません。'

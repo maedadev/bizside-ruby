@@ -12,8 +12,7 @@ class ZipValidator < ActiveModel::EachValidator
     return if (zip1.nil? or zip1.empty?) and (zip2.nil? or zip2.empty?)
 
     unless validate_zip(zip1, zip2)
-      record.errors[attribute] << I18n.t('errors.messages.zip')
-      return
+      record.errors.add(attribute, I18n.t('errors.messages.zip'))
     end
   end
 

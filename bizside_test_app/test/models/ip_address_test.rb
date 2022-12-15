@@ -106,4 +106,10 @@ class IpAddressTest < ActiveSupport::TestCase
       assert ip_address.invalid?
     end
   end
+
+  def test_エラーメッセージ
+    ip_address = IpAddress.new(ip_address_v4: 'xxx')
+    assert ip_address.invalid?
+    assert_equal ['Ip address v4 はIPアドレスとして正しくありません。'], ip_address.errors.full_messages
+  end
 end

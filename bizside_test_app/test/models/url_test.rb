@@ -75,6 +75,20 @@ class UrlTest < ActiveSupport::TestCase
     assert url.valid?
   end
 
+  def test_エラーメッセージ
+    url = Url.new(valid_params.merge(url: 'https://あああ.com'))
+    assert url.invalid?
+    assert_equal ['Url はURLとして正しくありません。'], url.errors.full_messages
+
+    url = Url.new(valid_params.merge(url: 'example.com'))
+    assert url.invalid?
+    assert_equal ['Url は http:// または https:// から始めてください。'], url.errors.full_messages
+
+    url = Url.new(valid_params.merge(url_without_schema: 'https://example.com'))
+    assert url.invalid?
+    assert_equal ['Url without schema は http:// または https:// を含めないでください。'], url.errors.full_messages
+  end
+
   def valid_params
     {
       url: 'http://example.com',

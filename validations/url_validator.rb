@@ -13,17 +13,17 @@ class UrlValidator < ActiveModel::EachValidator
     begin
       URI.parse(value)
     rescue URI::InvalidURIError
-      record.errors[attribute] << (options[:message] || "はURLとして正しくありません。")
+      record.errors.add(attribute, options[:message] || "はURLとして正しくありません。")
       return
     end
     
     if @with_schema
       unless value.start_with?('http://') or value.start_with?('https://')
-        record.errors[attribute] << (options[:message] || "は http:// または https:// から始めてください。")
+        record.errors.add(attribute, options[:message] || "は http:// または https:// から始めてください。")
       end
     else
       if value.start_with?('http://') or value.start_with?('https://')
-        record.errors[attribute] << (options[:message] || "は http:// または https:// を含めないでください。")
+        record.errors.add(attribute, options[:message] || "は http:// または https:// を含めないでください。")
       end
     end
   end

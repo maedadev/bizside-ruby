@@ -16,7 +16,7 @@ class IpAddressValidator < ActiveModel::EachValidator
         raise unless IPAddress::valid_ipv4?(value)
       end
     rescue
-      record.errors[attribute] << (options[:message] || "はIPアドレスとして正しくありません。")
+      record.errors.add(attribute, options[:message] || "はIPアドレスとして正しくありません。")
     end
   end
 end

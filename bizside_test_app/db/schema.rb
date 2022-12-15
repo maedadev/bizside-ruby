@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_021329) do
+ActiveRecord::Schema.define(version: 2022_12_14_075024) do
 
   create_table "attachment_files", force: :cascade do |t|
     t.string "file", null: false
@@ -26,9 +26,22 @@ ActiveRecord::Schema.define(version: 2021_11_17_021329) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tel_numbers", force: :cascade do |t|
+    t.string "tel"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "urls", force: :cascade do |t|
     t.string "url"
     t.string "url_without_schema"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "zip_codes", force: :cascade do |t|
+    t.string "zip1"
+    t.string "zip2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
