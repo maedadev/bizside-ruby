@@ -11,6 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         ruby-version: [2.5, 2.6, 2.7]
+        rails-version: [5.2.x, 6.1.x]
+    env:
+      RAILS_VERSION: ${{ matrix.rails-version }}
 
     steps:
       - uses: actions/checkout@v3
@@ -22,7 +25,8 @@ jobs:
       - name: Install gem
         run: bundle exec rake install
       - name: Set up test app
-        run: bundle install -j2
+        run: bundle install -j4
         working-directory: ./bizside_test_app
       - name: Run tests
-        run: bundle exec rake test CONFIG_FILE=bizside_test_app/config/bizside.yml
+        run: rails test CONFIG_FILE=bizside_test_app/config/bizside.yml
+        working-directory: ./bizside_test_app
