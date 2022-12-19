@@ -16,6 +16,6 @@ class TopControllerTest < ActionDispatch::IntegrationTest
   def test_トップ_iphone
     get '/', params: {ua: :iphone}
     assert_response :success
-    assert_template :"show.iphone"
+    assert_template :"show.iphone", '拡張した ActionView::TemplateRenderer で View のパスを判定している'
   end
 end

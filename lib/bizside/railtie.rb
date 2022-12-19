@@ -36,7 +36,7 @@ module Bizside
       require_relative 'user_agent'
 
       initializer 'user_agent' do
-        require_relative 'user_agent/action_view'
+        require_relative 'user_agent/action_view' unless Bizside.config.user_agent.use_default_path?
 
         ActiveSupport.on_load(:action_controller) do
           include Bizside::UserAgent::ControllerHelper

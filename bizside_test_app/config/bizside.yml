@@ -24,6 +24,8 @@ default: &default
       - '/assets'
   user_agent:
     enabled: true
+    # use_variant: true # View のパスに variant を使う場合は true にする
+    # use_default_path: true # ActionView::PathResolver について、Rails のパターンを使う場合は true、BizSide 独自のパターンを使う場合は false にする
   warning_validation:
     enabled: true
   file_uploader:
