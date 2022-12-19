@@ -1,3 +1,9 @@
+## 2.2.3
+  * bizside/user_agent/action_view
+    * ビューのパス探索に Rails のデフォルトのパターンを適用する機能を追加
+      * config/bizside.yml で user_agent.use_default_path を true にするとデフォルトのパターンになる 
+    * config/bizside.yml で user_agent.use_variant が true の場合に警告が出る問題を修正
+
 ## 2.2.2
   * mimemagic のバージョン制限を緩く（~> 0.3.10 から ~> 0.3 に変更）
 
