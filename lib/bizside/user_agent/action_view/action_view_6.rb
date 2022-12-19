@@ -1,5 +1,7 @@
 require 'action_view'
 
+warn("DEPRECATION WARNING: `require 'user_agent/action_view/action_view6'` is deprecated. Please set `user_agent.use_default_path: true` or `user_agent.use_variant: true` on config/bizside.yml instead.")
+
 class ActionView::TemplateRenderer
 
   def render(context, options)
