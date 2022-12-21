@@ -24,6 +24,7 @@ default: &default
       - '/assets'
   user_agent:
     enabled: true
+    use_variant: true
   warning_validation:
     enabled: true
   file_uploader:

@@ -62,14 +62,11 @@ test:
 
   teardown do
     ENV['CONFIG_FILE'] = @original_config_file_env
-    FileUtils.rm_rf(TEMP_BIZSIDE_YAML_PATH)
-
-    next if ::Bizside.config.within_bizside_namespace.present?
-
     TARGET_CLASS_NAMES.each do |class_name|
-      next if self.class.const_defined?(class_name)
-
-      self.class.const_set class_name, self.class.const_get("::Bizside::#{class_name}")
+      ::Object.__send__(:remove_const, class_name) rescue nil
     end
+    load 'bizside.rb'
+
+    FileUtils.rm_rf(TEMP_BIZSIDE_YAML_PATH)
   end
 end

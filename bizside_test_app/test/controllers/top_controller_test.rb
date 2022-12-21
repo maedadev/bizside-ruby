@@ -18,14 +18,14 @@ class TopControllerTest < ActionDispatch::IntegrationTest
   def test_トップ_iphone
     get '/', params: {ua: :iphone}
     assert_response :success
-    assert_template :"show.iphone"
+    assert_template :"show"
     assert response.body.include?('show.iphone.html.erb')
   end
 
   def test_トップ_android
     get '/', params: {ua: :android}
     assert_response :success
-    assert_template :"show.sp"
+    assert_template :"show"
     assert response.body.include?('show.sp.html.erb'), 'show.android.html.erb は無いので show.sp.html.erb を表示する'
   end
 end
