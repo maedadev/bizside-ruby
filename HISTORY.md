@@ -1,3 +1,11 @@
+## 2.3.0
+  * クライアントのデバイスによる View ファイルの切替において、Rails 標準の拡張子を使うように変更
+    * デバイスにより View ファイル を切り替えている場合は、ファイル名を BizSide 独自形式から Rails 標準の形式に変更してください
+      * BizSide 独自形式の例: show.pc.html.erb
+      * Rails 標準の形式の例: show.html+pc.erb
+    * Rails 5 では config/bizside.yml の user_agent が enabled: true の場合は use_varint: true も必要
+    * Rails 6 では config/bizside.yml の user_agent の use_varint の指定は DEPRECATED
+
 ## 2.2.3
   * Bizside::AuditLog
 
