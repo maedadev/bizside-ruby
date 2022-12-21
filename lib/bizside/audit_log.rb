@@ -24,12 +24,12 @@ module Bizside
 
     def call(env)
       start = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')
-      @status, @headers, @response = @app.call(env)
+      status, headers, response = @app.call(env)
       stop = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')      
       exception = env[Bizside::ShowExceptions::BIZSIDE_EXCEPTION_ENV_KEY]
 
       if env['BIZSIDE_SUPPRESS_AUDIT']
-        return @status, @headers, @response
+        return status, headers, response
       end
 
       if @@ignore_paths.any? do |path|
@@ -40,25 +40,25 @@ module Bizside
             env['REQUEST_URI'] == path
           end
         end
-        return @status, @headers, @response
+        return status, headers, response
       end
 
       if Bizside.rails_env&.development?
-        return @status, @headers, @response if env['REQUEST_URI'] =~ /\/[^\/]+\/assets\/.*/
+        return status, headers, response if env['REQUEST_URI'] =~ /\/[^\/]+\/assets\/.*/
       elsif Bizside.rails_env&.test?
-        return @status, @headers, @response
+        return status, headers, response
       end
 
-      info = build_loginfo(env, start, stop, @status, exception)
+      info = build_loginfo(env, start, stop, status, exception)
       logger.record(info)
 
-      return @status, @headers, @response
+      return status, headers, response
     end
 
     private
 
     def logger
-      @logger ||= Bizside::Audit::Logger.logger
+      Bizside::Audit::Logger.logger
     end
 
     def build_loginfo(env, start, stop, status, exception)
