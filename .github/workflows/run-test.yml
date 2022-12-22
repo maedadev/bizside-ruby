@@ -14,6 +14,7 @@ jobs:
         rails-version: [5.2.x, 6.1.x]
     env:
       RAILS_VERSION: ${{ matrix.rails-version }}
+      CONFIG_FILE: ./config/bizside.yml
 
     steps:
       - uses: actions/checkout@v3
@@ -27,6 +28,9 @@ jobs:
       - name: Set up test app
         run: bundle install -j4
         working-directory: ./bizside_test_app
+      - name: Set environment variables
+        run: echo 'CONFIG_FILE=./config/bizside_rails6.yml' >> $GITHUB_ENV
+        if: ${{ matrix.rails-version == '6.1.x' }}
       - name: Run tests
-        run: rails test CONFIG_FILE=bizside_test_app/config/bizside.yml
+        run: rails test
         working-directory: ./bizside_test_app
