@@ -28,9 +28,6 @@ jobs:
       - name: Set up test app
         run: bundle install -j4
         working-directory: ./bizside_test_app
-      - name: Set environment variables
-        run: echo 'CONFIG_FILE=./config/bizside_rails6.yml' >> $GITHUB_ENV
-        if: ${{ matrix.rails-version == '6.1.x' }}
       - name: Run tests
         run: rails test
         working-directory: ./bizside_test_app
