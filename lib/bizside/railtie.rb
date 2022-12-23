@@ -33,11 +33,13 @@ module Bizside
     end
 
     if Bizside.config.user_agent.enabled?
+      if Bizside.config.user_agent.to_h.has_key?('use_variant')
+        raise "ERROR: 'use_variant' is obsolete. Delete it from config/bizside.yml"
+      end
+
       require_relative 'user_agent'
 
       initializer 'user_agent' do
-        require_relative 'user_agent/action_view'
-
         ActiveSupport.on_load(:action_controller) do
           include Bizside::UserAgent::ControllerHelper
         end

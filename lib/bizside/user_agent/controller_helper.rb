@@ -23,7 +23,7 @@ module Bizside
           self.user_agent = ::Bizside::UserAgent.parse(request.env['HTTP_USER_AGENT'])
         end
 
-        set_request_variant if Bizside.config.user_agent.use_variant?
+        set_request_variant
 
         request.env['BIZSIDE_DEVICE'] = self.user_agent.name
       end
