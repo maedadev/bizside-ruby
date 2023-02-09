@@ -1,3 +1,7 @@
+## master
+  * Bizside::JobUtils
+    * ジョブが遅延しているか判定する `delayed?` を追加
+
 ## 2.3.0
 > **Warning**  
 > **!! BREAKING CHANGE !!**

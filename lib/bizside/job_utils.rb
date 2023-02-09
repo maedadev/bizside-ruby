@@ -99,6 +99,15 @@ module Bizside
       ::Resque.delayed_timestamp_size(timestamp)
     end
 
+    def self.delayed?(klass, *args)
+      if Bizside.rails_env&.test?
+        Rails.logger.info 'テスト時には遅延ジョブは無いものとします。'
+        return false
+      end
+
+      ::Resque.delayed?(klass, *args)
+    end
+
     def self.remove_delayed_in_queue(klass, queue, *args)
       if Bizside.rails_env&.test?
         Rails.logger.info "テスト時には遅延ジョブのキャンセルを行いません。"
