@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class Bizside::JobUtilsTest < ActiveSupport::TestCase
+  class SampleJob1; end
+  class SampleJob2; end
+  class SampleJob3; end
 
   def test_already_in_jobs?
     jobs = [
@@ -243,6 +246,25 @@ class Bizside::JobUtilsTest < ActiveSupport::TestCase
 
       assert_equal 'error in after_enqueue', e.message
       mock.verify
+    end
+  end
+
+  def test_delayed?
+    job_infos = [
+      { 'class' => SampleJob1.to_s, 'args' => [{ 'param' => 123 }], 'queue' => 'normal' },
+      { 'class' => SampleJob1.to_s, 'args' => [{ 'param' => 234 }], 'queue' => 'normal' },
+      { 'class' => SampleJob2.to_s, 'args' => [], 'queue' => 'normal' }
+    ]
+    timestamps = Array.new(job_infos.size)
+    JobUtils.stub(:delayed_queue_peek, timestamps) do
+      JobUtils.stub(:delayed_timestamp_peek, job_infos) do
+        assert JobUtils.delayed?(SampleJob1, { param: 123 }), 'ジョブと引数が一致したときは true'
+        assert_not JobUtils.delayed?(SampleJob1, { param: 456 }), '引数が異なるときは false'
+        assert_not JobUtils.delayed?(SampleJob3, { param: 123 }), 'ジョブが異なるときは false'
+
+        assert JobUtils.delayed?(SampleJob2, {}), '引数が無いときのチェック'
+        assert_not JobUtils.delayed?(SampleJob2, { param: 123 }), '引数が異なるときは false'
+      end
     end
   end
 end
