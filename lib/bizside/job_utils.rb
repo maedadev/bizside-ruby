@@ -108,6 +108,23 @@ module Bizside
       ::Resque.remove_delayed_in_queue(klass, queue, *args)
     end
 
+    # Resque.delayed? は @queue の定義がない場合に機能しないため、独自に実装
+    def self.delayed?(klass, args, except: [])
+      args_to_check = args.with_indifferent_access.except(*Array(except))
+
+      JobUtils.delayed_queue_peek(0, JobUtils.delayed_queue_schedule_size).each do |timestamp|
+        JobUtils.delayed_timestamp_peek(timestamp, 0, JobUtils.delayed_timestamp_size(timestamp)).each do |job_info|
+          job_args = job_info['args'].first.presence || {}
+          if job_info['class'] == klass.to_s && job_args == args_to_check
+            Rails.logger.info "遅延ジョブに #{job_info} がすでに登録されています。"
+            return true
+          end
+        end
+      end
+
+      false
+    end
+
     def self.set_job_at(time, klass, *args)
       if Bizside.rails_env&.test?
         do_perform_and_hooks_instantly(klass, 'テスト時には遅延ジョブの登録を行わず、即時実行します。', *args)
