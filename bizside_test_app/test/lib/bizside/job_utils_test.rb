@@ -267,4 +267,19 @@ class Bizside::JobUtilsTest < ActiveSupport::TestCase
       end
     end
   end
+
+  def test_delayed_except
+    job_infos = [
+      { 'class' => SampleJob1.to_s, 'args' => [{ 'foo' => 123, 'bar' => 456 }], 'queue' => 'normal' }
+    ]
+    timestamps = Array.new(job_infos.size)
+    JobUtils.stub(:delayed_queue_peek, timestamps) do
+      JobUtils.stub(:delayed_timestamp_peek, job_infos) do
+        assert_not JobUtils.delayed?(SampleJob1, { foo: 123, bar: 456, baz: 789 }), '引数が多い'
+        assert JobUtils.delayed?(SampleJob1, { foo: 123, bar: 456, baz: 789 }, except: [:baz]), 'baz を無視する'
+        assert JobUtils.delayed?(SampleJob1, { foo: 123, bar: 789 }, except: [:bar]), 'bar の値は無視する'
+        assert JobUtils.delayed?(SampleJob1, { foo: 123 }, except: [:bar]), 'bar の有無は無視する'
+      end
+    end
+  end
 end
