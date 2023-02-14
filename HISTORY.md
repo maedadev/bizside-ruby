@@ -1,4 +1,4 @@
-## master
+## 2.3.2
 * Bizside::JobUtils
   * `delayed?` の `except` オプションの不具合修正
 
