@@ -115,6 +115,7 @@ module Bizside
       JobUtils.delayed_queue_peek(0, JobUtils.delayed_queue_schedule_size).each do |timestamp|
         JobUtils.delayed_timestamp_peek(timestamp, 0, JobUtils.delayed_timestamp_size(timestamp)).each do |job_info|
           job_args = job_info['args'].first.presence || {}
+          job_args = job_args.with_indifferent_access.except(*Array(except))
           if job_info['class'] == klass.to_s && job_args == args_to_check
             Rails.logger.info "遅延ジョブに #{job_info} がすでに登録されています。"
             return true
