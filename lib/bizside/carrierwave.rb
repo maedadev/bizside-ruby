@@ -2,7 +2,7 @@ require 'carrierwave'
 require 'securerandom'
 
 # 日本語ファイル名のまま保存
-CARRIERWAVE_SANITIZE_REGEXP = /[^[:word:]①-⑨【】「」（）・＆、　 \(\)\.\-\+]/
+CARRIERWAVE_SANITIZE_REGEXP = /[^[:word:]①-⑨【】「」『』（）：・＆、　 \(\)\.\-\+]/
 CarrierWave::SanitizedFile.sanitize_regexp = CARRIERWAVE_SANITIZE_REGEXP
 
 module Bizside
