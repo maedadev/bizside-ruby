@@ -38,9 +38,9 @@ module Bizside
         ret = convert_to_image(pdf)
       when *EXT_PDF
         dest = file.path + '.png'
-        images = Magick::ImageList.new(file.path) do
-          self.quality = 100
-          self.density = 96
+        images = Magick::ImageList.new(file.path) do |m|
+          m.quality = 100
+          m.density = 96
         end
         images.first.write(dest)
         ret = File.new(dest)
