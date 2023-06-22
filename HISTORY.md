@@ -1,3 +1,7 @@
+## master
+* Bizside::FileConverter
+  * RMagick 5系に対応
+
 ## 2.3.3
 * Bizside::FileUploader
   * 以下の全角記号をファイル名の使用することを許可
