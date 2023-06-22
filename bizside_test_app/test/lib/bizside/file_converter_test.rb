@@ -3,6 +3,9 @@ require 'test_helper'
 class Bizside::FileConverterTest < ActiveSupport::TestCase
 
   def test_ClassMethod_convert_to_image_pdf
+    skip 'GitHub Actions で ImageMagick のセキュリティポリシー違反が発生するため'
+    # Magick::ImageMagickError: attempt to perform an operation not allowed by the security policy `PDF' @ error/constitute.c/IsCoderAuthorized/412
+
     png_binary_prefix = [0x89, 0x50, 0x4e, 0x47].pack('C*')
     image_file = nil
 
