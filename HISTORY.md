@@ -1,4 +1,4 @@
-## master
+## 2.3.4
 * Bizside::FileConverter
   * RMagick 5系に対応
 
