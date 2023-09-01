@@ -1,3 +1,6 @@
+## 2.3.5
+* Minitest を利用している箇所において MiniTest => Minitest にモジュール名を変更
+
 ## 2.3.4
 * Bizside::FileConverter
   * RMagick 5系に対応
