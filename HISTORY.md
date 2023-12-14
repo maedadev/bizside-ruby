@@ -1,3 +1,6 @@
+## 2.3.6
+* Bizside::LogAnalyzer を削除
+
 ## 2.3.5
 * Minitest を利用している箇所において MiniTest => Minitest にモジュール名を変更
 
