@@ -30,7 +30,7 @@ module Bizside
 
         def valid_#{attr}?
           valid_format?(@#{attr}) &&
-          valid_range?(MIN_#{attr.upcase}, MAX_#{attr.upcase}, @#{attr})
+          valid_range_and_step?(MIN_#{attr.upcase}, MAX_#{attr.upcase}, @#{attr})
         end
       EOS
     end
@@ -41,22 +41,40 @@ module Bizside
       value =~ /\A(\*(\/\d+)?|\d+(,\d+)*(-\d+)*(\/\d+)*)\Z/
     end
 
+    def valid_range_and_step?(min, max, value)
+      valid_range?(min, max, value) && valid_step?(min, max, value)
+    end
+
     def valid_range?(min, max, value)
-      validate_values = remove_to_ignore_value(value).split(",")
-      validate_values.reject do |v|
+      range_values = get_range_value(value).split(",")
+      range_values.reject do |v|
         if v.include?("-")
           range_v = v.split("-")
           (min..max).include?(range_v[0].to_i) &&
           (min..max).include?(range_v[1].to_i) &&
           range_v[0].to_i < range_v[1].to_i
         else
-          (min..max).include? v.to_i
+          (min..max).include?(v.to_i)
         end
       end.empty?
     end
 
-    def remove_to_ignore_value(value)
+    def valid_step?(min, max, value)
+      v = get_step_value(value)
+      return true if v.empty?
+
+      v != '*' &&
+      v.to_i != 0 &&
+      (min..max).include?(v.to_i)
+    end
+
+    def get_range_value(value)
       value.gsub(/(\/\d*|\*)/, "")
+    end
+
+    def get_step_value(value)
+      return "" unless value.include?('/')
+      value.gsub(/.*\/(.*)/) { $1 }
     end
   end
 end
