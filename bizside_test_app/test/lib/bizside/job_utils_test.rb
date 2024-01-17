@@ -282,4 +282,15 @@ class Bizside::JobUtilsTest < ActiveSupport::TestCase
       end
     end
   end
+
+  def test_set_cron_options
+    cronline = "*/59 * * * *"
+    expected = [cronline, { "blocking" => true }]
+    assert_equal expected, JobUtils.set_cron_options(cronline)
+    assert_equal expected, JobUtils.set_cron_options([cronline])
+    assert_equal expected, JobUtils.set_cron_options([cronline, { blocking: true }])
+    assert_equal expected, JobUtils.set_cron_options([cronline, { "blocking" => true }])
+    assert_equal expected, JobUtils.set_cron_options([cronline, { "blocking" => false }])
+  end
+
 end

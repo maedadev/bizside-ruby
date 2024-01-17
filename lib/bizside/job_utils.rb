@@ -173,9 +173,11 @@ module Bizside
       if cronline.to_s.strip.empty?
         return
       elsif CronValidator.new(cronline).valid?
+        new_cron = set_cron_options(cron)
+
         config = {
           :class => job_type,
-          :cron => cron,
+          :cron => new_cron,
           :args => args,
           :persist => true
         }
@@ -403,6 +405,20 @@ module Bizside
       end
     end
     private_class_method :do_perform_and_hooks_instantly
+
+    def self.set_cron_options(cron)
+      ret = Array(cron)
+      if ret.size > 1
+        opts = ret.second
+        opts ||= {}
+        opts = opts.with_indifferent_access
+        opts = opts.merge(blocking: true)
+      else
+        opts = { blocking: true }.with_indifferent_access
+      end
+      ret[1] = opts
+      ret
+    end
 
   end
 end
