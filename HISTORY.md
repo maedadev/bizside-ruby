@@ -1,3 +1,9 @@
+## 2.3.7
+* Bizside::CronValidator 
+** バリデーションを強化
+* Bizside::JobUtils
+** add_cron_to と add_cron で cron を設定する際 blocking: true オプションを自動で付与
+
 ## 2.3.6
 * Bizside::LogAnalyzer を削除
 
