@@ -17,12 +17,12 @@ Gem::Specification.new do |s|
                   Dir['rails/**/*'] +
                   Dir['validations/**/*']
 
-  s.required_ruby_version = '>= 2.5.0'
+  s.required_ruby_version = '>= 2.7.0'
 
   s.add_runtime_dependency 'activesupport', '>= 5.0.0', '< 7.0.0'
   s.add_runtime_dependency 'aws-sdk-s3', '~> 1.94'
   s.add_runtime_dependency 'capistrano', '< 3.0.0'
-  s.add_runtime_dependency 'carrierwave', '~> 2.2'
+  s.add_runtime_dependency 'carrierwave', '>= 2.2.0', '< 4.0.0'
   s.add_runtime_dependency 'carrierwave-magic', '~> 0.0.4'
   s.add_runtime_dependency 'fog-aws', '~> 3.0'
   s.add_runtime_dependency 'faraday', '>= 0.12', '< 2.0.0'
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rake', '>= 12.3', '< 14.0'
 
   s.add_development_dependency 'RedCloth', '~> 4.2'
-  s.add_development_dependency 'capybara', '~> 3.0', '< 3.36'
+  s.add_development_dependency 'capybara', '~> 3.0'
   s.add_development_dependency 'cucumber', '~> 7.1'
   s.add_development_dependency 'cucumber-rails', '~> 2.5'
   s.add_development_dependency 'devise', '>= 3.4.0', '< 5.0.0'

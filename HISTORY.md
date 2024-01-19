@@ -1,3 +1,21 @@
+## 3.0.0
+  * Ruby 2.5 のサポート廃止
+  * CarrierWave v3 のサポート
+    ファイルの保存処理が after_commit から after_save になります。
+    https://github.com/carrierwaveuploader/carrierwave/blob/master/CHANGELOG.md
+    ```
+    [BREAKING CHANGE] Change to store files on after_save hook instead of after_commit, with performing cleanup when transaction is rolled back (@fsateler #2546)
+    ```
+    CarrierWave v2 では after_commit でファイルを保存していたので、ActiveRecrodが保存されてもその後のファイル保存中にネットワークエラーなどがあるとファイルは存在しない、といったことが発生してました。
+    CarrierWave v3 では after_save でファイルを保存するので、ファイルの保存でエラーになると、ActiveRecordの保存もロールバックされます。
+    
+    参考：
+      * v3 で after_save に戻した: https://github.com/carrierwaveuploader/carrierwave/pull/2546
+      * v2 の時に after_commit になった: https://github.com/carrierwaveuploader/carrierwave/pull/2209
+
+--------------------------------------------------------------------------------
+
+
 ## 2.3.7
 * Bizside::CronValidator 
 ** バリデーションを強化
