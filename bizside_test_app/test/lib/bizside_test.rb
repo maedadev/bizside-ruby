@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BiziseTest < ActiveSupport::TestCase
+class BizsideTest < ActiveSupport::TestCase
   TARGET_CLASS_NAMES = %w[
     CronValidator Gengou JobUtils QueryBuilder
     RecordHasWarnings SqlUtils StringUtils UserAgent Yes

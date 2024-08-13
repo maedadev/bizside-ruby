@@ -6,7 +6,7 @@
     ```
     [BREAKING CHANGE] Change to store files on after_save hook instead of after_commit, with performing cleanup when transaction is rolled back (@fsateler #2546)
     ```
-    CarrierWave v2 では after_commit でファイルを保存していたので、ActiveRecrodが保存されてもその後のファイル保存中にネットワークエラーなどがあるとファイルは存在しない、といったことが発生してました。
+    CarrierWave v2 では after_commit でファイルを保存していたので、ActiveRecordが保存されてもその後のファイル保存中にネットワークエラーなどがあるとファイルは存在しない、といったことが発生してました。
     CarrierWave v3 では after_save でファイルを保存するので、ファイルの保存でエラーになると、ActiveRecordの保存もロールバックされます。
     
     参考：
@@ -34,7 +34,7 @@
 
 ## 2.3.3
 * Bizside::FileUploader
-  * 以下の全角記号をファイル名の使用することを許可
+  * 以下の全角記号をファイル名に使用することを許可
     ```
     『
     』
