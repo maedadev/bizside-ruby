@@ -18,9 +18,9 @@
 
 ## 2.3.7
 * Bizside::CronValidator 
-** バリデーションを強化
+  * バリデーションを強化
 * Bizside::JobUtils
-** add_cron_to と add_cron で cron を設定する際 blocking: true オプションを自動で付与
+  * add_cron_to と add_cron で cron を設定する際 blocking: true オプションを自動で付与
 
 ## 2.3.6
 * Bizside::LogAnalyzer を削除
@@ -57,8 +57,8 @@
       * BizSide 独自形式の例: `show.pc.html.erb`
       * Rails 標準の形式の例: `show.html+pc.erb`
   * config/bizside.yml の user_agent が enabled: true の場合、常に request.variant へのセットを行うように変更
-    * これまでは use_varint: true の場合のみセットしていました
-    * use_varint は廃止になりました。config/bizside.yml にある場合は削除してください
+    * これまでは use_variant: true の場合のみセットしていました
+    * use_variant は廃止になりました。config/bizside.yml にある場合は削除してください
 
 ## 2.2.3
   * Bizside::AuditLog
