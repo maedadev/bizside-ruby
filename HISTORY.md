@@ -1,3 +1,6 @@
+## main
+  * Ruby 2.6 のサポート復活
+
 ## 3.0.0
   * Ruby 2.5 のサポート廃止
   * CarrierWave v3 のサポート
