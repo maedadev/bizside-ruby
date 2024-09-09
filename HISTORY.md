@@ -1,5 +1,7 @@
 ## main
   * Ruby 2.6 のサポート復活
+  * Bizside::Acl::ControllerHelper
+    * authorize_user! で x-requested-with ヘッダに "XMLHttpRequest" という文字列（大文字小文字区別なし）が含まれていた場合 root_path にリダイレクトではなく 403 を返却
 
 ## 3.0.0
   * Ruby 2.5 のサポート廃止
