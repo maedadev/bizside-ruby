@@ -1,3 +1,6 @@
+## 2.3.8（3.0.2をバックポート）
+  * 監査ログ項目 remote_addoress は x-forwared-for / client-ip の値も参照し、アクセス元のクライアントIPを記録するように変更
+
 ## 2.3.7
 * Bizside::CronValidator 
 ** バリデーションを強化
