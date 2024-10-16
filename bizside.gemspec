@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Bizside is an utilities for web application.'
   s.description = 'Bizside is an utilities to assist building web application.'
   s.authors     = ['bizside-developers']
-  s.email       = ['bizside-developers@lab.acs-jp.com']
+  s.email       = ['bizside-developers@bizside.biz']
   s.homepage    = 'https://github.com/maedadev/bizside-ruby'
   s.licenses    = 'MIT'
   s.files       = Dir['app/**/*'] +
