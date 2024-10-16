@@ -58,4 +58,14 @@ class Bizside::AuditLogTest < ActiveSupport::TestCase
     assert_equal 'aaaa', al.__send__(:detect_exception_message, ex, truncate_length: 4), 'Bizside::AuditLog全体として指定した truncate_length より引数を優先すること'
   end
 
+  def test_to_client_ip
+    al = Bizside::AuditLog.new(nil)
+    assert_nil al.__send__(:to_client_ip, nil)
+    assert_nil al.__send__(:to_client_ip, '')
+    assert_equal '192.168.0.1', al.__send__(:to_client_ip, '192.168.0.1')
+    assert_equal '192.168.0.1', al.__send__(:to_client_ip, '192.168.0.1,')
+    assert_equal '192.168.0.1', al.__send__(:to_client_ip, '192.168.0.1, 172.0.0.1')
+    assert_equal '192.168.0.1', al.__send__(:to_client_ip, '192.168.0.1, 172.0.0.1, ')
+  end
+
 end

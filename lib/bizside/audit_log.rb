@@ -82,7 +82,7 @@ module Bizside
         referrer: env['HTTP_REFERER'],
         request_method: env['REQUEST_METHOD'],
         request_uri: env['BIZSIDE_REQUEST_URI'].presence || env['REQUEST_URI'],
-        remote_address: env['REMOTE_ADDR'],
+        remote_address: to_client_ip(env['HTTP_X_FORWARDED_FOR']) || to_client_ip(env['HTTP_CLIENT_IP']) || env['REMOTE_ADDR'],
         status: status,
         started_at: start,
         finished_at: stop,
@@ -178,6 +178,12 @@ module Bizside
       return '' unless exception
 
       exception.backtrace.join("\n")[0...truncate_length]
+    end
+
+    # 信頼のおけるロードバランサーがプロキシーになっている前提で、各HTTPヘッダの先頭のIPをクライアントIPとして取得する
+    def to_client_ip(header_value)
+      ips = header_value ? header_value.strip.split(/[,\s]+/) : []
+      ips.first
     end
 
   end

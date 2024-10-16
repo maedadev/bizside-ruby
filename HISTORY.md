@@ -1,3 +1,6 @@
+## 3.0.2
+  * 監査ログ項目 remote_addoress は x-forwared-for / client-ip の値も参照し、アクセス元のクライアントIPを記録するように変更
+
 ## 3.0.1
   * Ruby 2.6 のサポート復活
   * Bizside::Acl::ControllerHelper
