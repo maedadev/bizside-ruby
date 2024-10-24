@@ -27,6 +27,9 @@
 --------------------------------------------------------------------------------
 
 
+## 2.3.9（3.0.3をバックポート）
+  * 監査ログ項目 remote_addoress に使用する x-forwared-for / client-ip の値からプロキシーサーバを除外する設定 Bizside::AuditLog.trusted_proxy_cidrs を追加
+
 ## 2.3.8（3.0.2をバックポート）
   * 監査ログ項目 remote_addoress は x-forwared-for / client-ip の値も参照し、アクセス元のクライアントIPを記録するように変更
 
