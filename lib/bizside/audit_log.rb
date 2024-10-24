@@ -1,13 +1,21 @@
+require 'ipaddr'
 require_relative 'audit/logger'
 
 module Bizside
   class AuditLog
 
     @@ignore_paths = []
+    @@trusted_proxy_cidrs = []
+    @@trusted_proxy_cidr_objects = {}
     @@truncate_length = 8192
 
     def self.ignore_paths
       @@ignore_paths
+    end
+
+    # 192.168.0.0/24 といったCIDR表記の文字列を複数指定可能
+    def self.trusted_proxy_cidrs
+      @@trusted_proxy_cidrs
     end
 
     def self.truncate_length
@@ -25,7 +33,7 @@ module Bizside
     def call(env)
       start = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')
       status, headers, response = @app.call(env)
-      stop = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')      
+      stop = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')
       exception = env[Bizside::ShowExceptions::BIZSIDE_EXCEPTION_ENV_KEY]
 
       if env['BIZSIDE_SUPPRESS_AUDIT']
@@ -180,10 +188,23 @@ module Bizside
       exception.backtrace.join("\n")[0...truncate_length]
     end
 
-    # 信頼のおけるロードバランサーがプロキシーになっている前提で、各HTTPヘッダの先頭のIPをクライアントIPとして取得する
+    # 信頼のおけるロードバランサーがプロキシーになっている前提で、各HTTPヘッダの最後のIPをクライアントIPとして取得する
     def to_client_ip(header_value)
       ips = header_value ? header_value.strip.split(/[,\s]+/) : []
-      ips.first
+      ips.reverse.each do |ip|
+        return ip unless proxy?(ip)
+      end
+
+      nil
+    end
+
+    def proxy?(ip)
+      @@trusted_proxy_cidrs.each do |cidr|
+        cidr_obj = @@trusted_proxy_cidr_objects[cidr] ||= IPAddr.new(cidr)
+        return true if cidr_obj.include?(ip)
+      end
+
+      false
     end
 
   end
