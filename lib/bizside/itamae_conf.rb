@@ -121,7 +121,7 @@ module Bizside
   # config/itamae.yml::                         設定ファイル-2(*2)
   # /etc/bizside/hanaita.yml::                  設定ファイル-3
   #
-  # (*1) RAISL_ENV に該当する部分のみ 'db' エントリの下に読み込みます。
+  # (*1) RAILS_ENV に該当する部分のみ 'db' エントリの下に読み込みます。
   # (*2) 指定された ROLE のみ読み込みます。
   class ItamaeConf < ItamaeConfSub
     class OverWriteError < StandardError; end
