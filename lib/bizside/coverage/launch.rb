@@ -1,6 +1,6 @@
 module Bizside
   module Coverage
-    class CoverageLaunch
+    class Launch
 
       def self.load
         if ENV["COVERAGE"].to_s.downcase == 'true' and ENV['ACCEPTANCE_TEST'].to_s.downcase == 'true'
