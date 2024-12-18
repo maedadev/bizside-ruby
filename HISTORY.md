@@ -1,3 +1,6 @@
+## 3.0.4
+  トップレベルにモジュール Coverage を定義して Ruby 標準クラス Coverage とバッティングしていたのを修正
+
 ## 3.0.3
   * 監査ログ項目 remote_address に使用する x-forwarded-for / client-ip の値からプロキシーサーバを除外する設定 Bizside::AuditLog.trusted_proxy_cidrs を追加
 
