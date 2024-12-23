@@ -159,3 +159,39 @@ end
 Resque::Failure::Multiple.configure do |multi|
   multi.classes = [Resque::Failure::Redis, Resque::Failure::LogOutput, Resque::Failure::JobAuditLog]
 end
+
+# resque-scheduler
+if defined? Resque::Scheduler
+  module Bizside
+    module ResqueScheduler
+      class FailureHandler
+        def self.on_enqueue_failure(payload, exception)
+          ::Resque::Scheduler::FailureHandler.on_enqueue_failure(payload, exception)
+
+          return if Bizside.rails_env&.test?
+
+          ::Bizside.logger.error [
+            "[FATAL] Resque::Scheduler",
+            "#{payload}",
+            "#{exception.class} #{exception.to_s}",
+            "#{Array(exception.backtrace).join("\n")}"
+          ].join("\n")
+
+          @hostname ||= (`hostname`.chomp rescue '(unknown)')
+          info = {
+            time: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z'),
+            add_on_name: Bizside.config.add_on_name,
+            server_address: @hostname,
+            class: payload['class'],
+            args: payload['args'].to_s,
+            exception: exception.class,
+            exception_message:  exception.to_s,
+            exception_backtrace: Array(exception.backtrace)[0..10].join("\n") # Get only the top 10 because there are many traces.
+          }
+          ::Bizside::Audit::JobLogger.logger.record(info)
+        end
+      end
+    end
+  end
+  Resque::Scheduler.failure_handler = Bizside::ResqueScheduler::FailureHandler
+end
