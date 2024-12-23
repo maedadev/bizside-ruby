@@ -23,6 +23,10 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install libsqlite3-dev libmagic-dev libmagick++-dev
       - name: Install gem
         run: bundle exec rake install
       - name: Set up test app
