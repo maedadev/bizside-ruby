@@ -1,3 +1,6 @@
+## master
+  * resque-scheduler でジョブ登録に失敗したときにログ出力が行えるように
+
 ## 3.0.4
   トップレベルにモジュール Coverage を定義して Ruby 標準クラス Coverage とバッティングしていたのを修正
 
