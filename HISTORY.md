@@ -1,3 +1,7 @@
+## 3.0.6
+  * BIZSIDE_ENV: education の考慮を追加
+    educationの場合、RAILS_ENVはproductionとする。
+
 ## 3.0.5
   * resque-scheduler でジョブ登録に失敗したときにログ出力が行えるように
 
