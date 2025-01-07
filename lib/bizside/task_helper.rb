@@ -53,7 +53,7 @@ def self.rails_env
   if ENV['RAILS_ENV'].to_s.empty?
     unless ENV['BIZSIDE_ENV'].to_s.empty?
       case ENV['BIZSIDE_ENV']
-      when 'production', 'staging'
+      when 'production', 'staging', 'education'
         ret = ENV['RAILS_ENV'] = 'production'
       else
         ret = ENV['RAILS_ENV'] = ENV['BIZSIDE_ENV']
