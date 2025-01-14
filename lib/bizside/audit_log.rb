@@ -31,6 +31,10 @@ module Bizside
     end
 
     def call(env)
+      dup._call(env)
+    end
+
+    def _call(env)
       start = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')
       status, headers, response = @app.call(env)
       stop = Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z')

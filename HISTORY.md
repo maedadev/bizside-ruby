@@ -1,3 +1,7 @@
+## 3.0.7
+  * 監査ログ関連で状態管理が発生するような機能追加に備えてスレッドセーフティを事前に強化
+  * ffi のバージョンを 1.17.0 以下に固定
+
 ## 3.0.6
   * BIZSIDE_ENV: education の考慮を追加
     educationの場合、RAILS_ENVはproductionとする。
