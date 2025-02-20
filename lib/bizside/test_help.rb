@@ -1,7 +1,7 @@
 require 'minitest/reporters'
 
 require_relative 'coverage/launch'
-Bizside::CoverageLaunch.load_from_test_helper()
+Bizside::Coverage::Launch.load_from_test_helper()
 
 case ENV['CI'].to_s.downcase
 when 'jenkins'

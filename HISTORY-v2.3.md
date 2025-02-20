@@ -1,14 +1,18 @@
-## 2.3.8（3.0.3をバックポート）
-  * 監査ログ項目 remote_addoress に使用する x-forwared-for / client-ip の値からプロキシーサーバを除外する設定 Bizside::AuditLog.trusted_proxy_cidrs を追加
-  
+## 2.3.10（3.0.4, 3.0.5をバックポート）
+  * トップレベルにモジュール Coverage を定義して Ruby 標準クラス Coverage とバッティングしていたのを修正
+  * resque-scheduler でジョブ登録に失敗したときにログ出力が行えるように
+
+## 2.3.9（3.0.3をバックポート）
+  * 監査ログ項目 remote_address に使用する x-forwarded-for / client-ip の値からプロキシーサーバを除外する設定 Bizside::AuditLog.trusted_proxy_cidrs を追加
+
 ## 2.3.8（3.0.2をバックポート）
-  * 監査ログ項目 remote_addoress は x-forwared-for / client-ip の値も参照し、アクセス元のクライアントIPを記録するように変更
+  * 監査ログ項目 remote_address は x-forwarded-for / client-ip の値も参照し、アクセス元のクライアントIPを記録するように変更
 
 ## 2.3.7
 * Bizside::CronValidator 
-** バリデーションを強化
+  * バリデーションを強化
 * Bizside::JobUtils
-** add_cron_to と add_cron で cron を設定する際 blocking: true オプションを自動で付与
+  * add_cron_to と add_cron で cron を設定する際 blocking: true オプションを自動で付与
 
 ## 2.3.6
 * Bizside::LogAnalyzer を削除
@@ -22,7 +26,7 @@
 
 ## 2.3.3
 * Bizside::FileUploader
-  * 以下の全角記号をファイル名の使用することを許可
+  * 以下の全角記号をファイル名に使用することを許可
     ```
     『
     』
@@ -38,15 +42,15 @@
   * ジョブが遅延しているか判定する `delayed?` を追加
 
 ## 2.3.0
-> **Warning**  
+> [!Warning]
 > **!! BREAKING CHANGE !!**
   * クライアントのデバイスによる View ファイルの切替において、Rails 標準の拡張子を使うように変更
     * デバイスにより View ファイル を切り替えている場合は、ファイル名を BizSide 独自形式から Rails 標準の形式に変更してください
       * BizSide 独自形式の例: `show.pc.html.erb`
       * Rails 標準の形式の例: `show.html+pc.erb`
   * config/bizside.yml の user_agent が enabled: true の場合、常に request.variant へのセットを行うように変更
-    * これまでは use_varint: true の場合のみセットしていました
-    * use_varint は廃止になりました。config/bizside.yml にある場合は削除してください
+    * これまでは use_variant: true の場合のみセットしていました
+    * use_variant は廃止になりました。config/bizside.yml にある場合は削除してください
 
 ## 2.2.3
   * Bizside::AuditLog
