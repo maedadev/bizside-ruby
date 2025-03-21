@@ -14,19 +14,20 @@ require_relative 'audit/job_logger'
   yaml: ['config/resque.yml', 'config/redis.yml'],
   json: ['config/resque.json', 'config/redis.json']
 }.each do |format, file_candidates|
+  resque_config_loader = case format
+    when :yaml
+      ->(text) { YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(text) : YAML.load(text) }
+    when :json
+      ->(text) { ActiveSupport::JSON.decode(text) }
+    end
+
   file_candidates.each do |file|
     resque_file = File.join(File.expand_path(ENV['RAILS_ROOT'] || '.'), file)
     next unless File.exist?(resque_file)
 
-    _resque_config = ERB.new(File.read(resque_file), 0, '-').result
-  
-    case format
-    when :yaml
-      resque_config = YAML.safe_load(_resque_config)[Bizside.env]
-    when :json
-      resque_config = ActiveSupport::JSON.decode(_resque_config)[Bizside.env]
-    else
-      raise "不正なResque設定ファイルです。#{file}"
+    resque_config = ERB.new(File.read(resque_file), 0, '-').result.then do |text|
+      entire_config = resque_config_loader.call(text)
+      entire_config[Bizside.env]
     end
 
     if resque_config.is_a?(Hash)

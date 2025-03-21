@@ -27,7 +27,8 @@ end
 
 CarrierWave.configure do |config|
   database_yml = ERB.new(File.read(File.join('config', 'database.yml')), 0, '-').result
-  database = YAML.load(database_yml)[Bizside.env]['database']
+  entire_config = YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(database_yml) : YAML.load(database_yml)
+  database = entire_config[Bizside.env]['database']
 
   config.root = File.join('/data', Bizside.config.add_on_name, database)
 

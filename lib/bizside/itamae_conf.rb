@@ -41,7 +41,8 @@ module Bizside
       for conf_file in self.class.conf_files do
         if File.exist?(conf_file)
           @_conf ||= {}
-          hash = YAML.load(ERB.new(File.read(conf_file)).result)
+          text = ERB.new(File.read(conf_file)).result
+          hash = YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(text) : YAML.load(text)
 
           case conf_file
           # itamae.yml スペシャルロジック。ROLE必須。

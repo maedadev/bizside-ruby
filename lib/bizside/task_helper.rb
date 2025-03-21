@@ -176,7 +176,10 @@ end
 
 def self.ask_env(env_key, options = {})
   cache_file = 'tmp/cache/env'
-  cache = File.exist?(cache_file) ? YAML.load_file(cache_file) : {}
+  cache = cache_file.then do |filename|
+    next {} unless File.exist?(filename)
+    YAML.respond_to?(:unsafe_load_file) ? YAML.unsafe_load_file(filename) : YAML.load_file(filename)
+  end
 
   if options.fetch(:cache, false)
     options = options.merge(default: cache.fetch(env_key, options[:default]))
