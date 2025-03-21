@@ -8,7 +8,7 @@ module Bizside
         configfile = File.join('config', 'mail.yml')
         
         @mail = if File.exist?(configfile)
-            entire_config = YAML.respond_to?(:unsafe_load_file) ? YAML.unsafe_load_file(configfile) : YAML.load_file(configfile)
+            entire_config = YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(configfile, aliases: true) : YAML.load_file(configfile)
             Bizside::Config.new(entire_config[Bizside.env])
           else
             Bizside::Config.new

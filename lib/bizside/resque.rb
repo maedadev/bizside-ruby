@@ -16,7 +16,7 @@ require_relative 'audit/job_logger'
 }.each do |format, file_candidates|
   resque_config_loader = case format
     when :yaml
-      ->(text) { YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(text) : YAML.load(text) }
+      ->(text) { YAML.respond_to?(:safe_load) ? YAML.safe_load(text, aliases: true) : YAML.load(text) }
     when :json
       ->(text) { ActiveSupport::JSON.decode(text) }
     end

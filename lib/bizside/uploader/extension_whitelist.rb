@@ -6,7 +6,7 @@ module Bizside
       included do
         @@extensions = Bizside.config.file_uploader.extensions_file_path.then do |filename|
           filename = File.join(__dir__, 'default_extensions.yml') unless filename.present?
-          entire_config = YAML.respond_to?(:unsafe_load_file) ? YAML.unsafe_load_file(filename) : YAML.load_file(filename)
+          entire_config = YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(filename, aliases: true) : YAML.load_file(filename)
           entire_config.values
         end
       end

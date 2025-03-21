@@ -12,7 +12,7 @@ module Bizside
       conf_file = ENV['HANAITA_CONF'] || CONF_FILE
       @_conf = conf_file.then do |filename|
         next nil unless File.exist?(filename)
-        YAML.respond_to?(:unsafe_load_file) ? YAML.unsafe_load_file(filename) : YAML.load_file(filename)
+        YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(filename, aliases: true) : YAML.load_file(filename)
       end
     end
 

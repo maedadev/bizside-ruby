@@ -42,7 +42,7 @@ module Bizside
         if File.exist?(conf_file)
           @_conf ||= {}
           text = ERB.new(File.read(conf_file)).result
-          hash = YAML.respond_to?(:unsafe_load) ? YAML.unsafe_load(text) : YAML.load(text)
+          hash = YAML.respond_to?(:safe_load) ? YAML.safe_load(text, aliases: true) : YAML.load(text)
 
           case conf_file
           # itamae.yml スペシャルロジック。ROLE必須。

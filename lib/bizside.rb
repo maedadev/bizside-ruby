@@ -53,7 +53,7 @@ module Bizside
     configfile = ENV['CONFIG_FILE'] || File.join('config', 'bizside.yml')
     raise "設定ファイルの #{configfile} は必須です。" unless File.exist?(configfile)
 
-    entire_config = YAML.respond_to?(:unsafe_load_file) ? YAML.unsafe_load_file(configfile) : YAML.load_file(configfile)
+    entire_config = YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(configfile, aliases: true) : YAML.load_file(configfile)
     @@_config = Bizside::Config.new(entire_config[Bizside.env])
   end
 

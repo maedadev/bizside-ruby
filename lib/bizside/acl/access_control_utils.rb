@@ -14,7 +14,7 @@ class Bizside::Acl::AccessControlUtils
   end
 
   def self.merge(filename)
-    entire_config = YAML.respond_to?(:unsafe_load_file) ? YAML.unsafe_load_file(filename) : YAML.load_file(filename)
+    entire_config = YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(filename, aliases: true) : YAML.load_file(filename)
     entire_config.each do |roll_key, values|
       @@access_control[roll_key] ||= {}
       @@access_control[roll_key].merge!(values)
