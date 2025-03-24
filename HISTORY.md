@@ -1,4 +1,4 @@
-## master
+## 3.0.8
   * Added support for Psych 4
 
 ## 3.0.7
