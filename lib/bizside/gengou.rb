@@ -2,7 +2,9 @@ require 'yaml'
 
 module Bizside
   class Gengou
-    @@_gengou = YAML.load_file(File.join(File.dirname(__FILE__), 'gengou.yml'))
+    @@_gengou = File.join(__dir__, 'gengou.yml').then do |filename|
+      YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(filename, permitted_classes: [Date]) : YAML.load_file(filename)
+    end
 
     def self.to_seireki(gengou, year_jp)
       # 引数 year_jpには年度の値が入る

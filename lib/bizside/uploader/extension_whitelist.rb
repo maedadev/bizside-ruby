@@ -4,9 +4,11 @@ module Bizside
       extend ActiveSupport::Concern
 
       included do
-        default_extensions = Bizside.config.file_uploader.extensions_file_path.present? ? Bizside.config.file_uploader.extensions_file_path : 
-          File.join(File.dirname(__FILE__), 'default_extensions.yml')
-        @@extensions = YAML.load_file(default_extensions).values
+        @@extensions = Bizside.config.file_uploader.extensions_file_path.then do |filename|
+          filename = File.join(__dir__, 'default_extensions.yml') unless filename.present?
+          entire_config = YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(filename, aliases: true) : YAML.load_file(filename)
+          entire_config.values
+        end
       end
       
       def extension_allowlist

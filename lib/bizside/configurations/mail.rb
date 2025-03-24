@@ -3,17 +3,16 @@ module Bizside
     module Mail
 
       def mail
-        if @mail.nil?
-          configfile = File.join('config', 'mail.yml')
-        
-          if File.exist?(configfile)
-            @mail = Bizside::Config.new(YAML.load_file(configfile)[Bizside.env])
-          else
-            @mail = Bizside::Config.new
-          end
-        end
+        return @mail if defined? @mail
 
-        @mail
+        configfile = File.join('config', 'mail.yml')
+        
+        @mail = if File.exist?(configfile)
+            entire_config = YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(configfile, aliases: true) : YAML.load_file(configfile)
+            Bizside::Config.new(entire_config[Bizside.env])
+          else
+            Bizside::Config.new
+          end
       end
 
       def default_url_options

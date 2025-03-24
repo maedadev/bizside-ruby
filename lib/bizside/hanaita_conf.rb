@@ -10,7 +10,10 @@ module Bizside
 
     def initialize
       conf_file = ENV['HANAITA_CONF'] || CONF_FILE
-      @_conf = YAML.load_file(conf_file) if File.exist?(conf_file)
+      @_conf = conf_file.then do |filename|
+        next nil unless File.exist?(filename)
+        YAML.respond_to?(:safe_load_file) ? YAML.safe_load_file(filename, aliases: true) : YAML.load_file(filename)
+      end
     end
 
     def conf
