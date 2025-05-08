@@ -76,6 +76,7 @@ module Bizside
     def build_loginfo(env, start, stop, status, exception)
       info = {
         time: start,
+        env: ENV['X-BIZSIDE-ENV'].presence || ENV['RAILS_ENV'],
         add_on_name: detect_add_on_name(env),
         feature: detect_feature(env),
         action: detect_action(env),
@@ -99,11 +100,21 @@ module Bizside
         started_at: start,
         finished_at: stop,
         device: detect_device(env),
-        user_agent: detect_user_agent(env),
-        exception: detect_exception(exception),
-        exception_message: detect_exception_message(exception),
-        exception_backtrace: detect_exception_backtrace(exception)
+        user_agent: detect_user_agent(env)
       }
+
+      exception_class_name = detect_exception(exception)
+      if exception_class_name.to_s.present?
+        info[:exception] = exception_class_name
+      end
+      exception_message = detect_exception_message(exception)
+      if exception_message.to_s.present?
+        info[:exception_message] = exception_message
+      end
+      exception_backtrace = detect_exception_backtrace(exception)
+      if exception_backtrace.to_s.present?
+        info[:exception_backtrace] = exception_backtrace
+      end
 
       info
     end

@@ -127,6 +127,7 @@ module Resque
       def build_loginfo
         info = {
           time: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z'),
+          env: ENV['X-BIZSIDE-ENV'].presence || ENV['RAILS_ENV'],
           add_on_name: Bizside.config.add_on_name,
           server_address: hostname,
           class: payload['class'],
@@ -181,6 +182,7 @@ if defined? Resque::Scheduler
           @hostname ||= (`hostname`.chomp rescue '(unknown)')
           info = {
             time: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z'),
+            env: ENV['X-BIZSIDE-ENV'].presence || ENV['RAILS_ENV'],
             add_on_name: Bizside.config.add_on_name,
             server_address: @hostname,
             class: payload['class'],
