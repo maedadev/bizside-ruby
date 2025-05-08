@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: [2.6, 2.7]
+        ruby-version: [2.7]
         rails-version: [5.2.x, 6.1.x]
     env:
       RAILS_VERSION: ${{ matrix.rails-version }}
