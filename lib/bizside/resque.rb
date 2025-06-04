@@ -104,6 +104,11 @@ module Resque
   end
 end
 
+# 開始時刻
+Resque.before_fork do |job|
+  Thread.current[:started_at] = Time.now
+end
+
 # エラーをLTSV形式で専用ログに出力
 module Resque
   module Failure
@@ -134,6 +139,8 @@ module Resque
           args: payload['args'].to_s,
           queue: queue,
           worker: worker.to_s,
+          started_at: Thread.current[:started_at]&.strftime('%Y-%m-%dT%H:%M:%S.%3N%z'),
+          finished_at: Time.now.strftime('%Y-%m-%dT%H:%M:%S.%3N%z'),
           exception: exception.class,
           exception_message: exception.to_s,
           exception_backtrace: Array(exception.backtrace)[0..10].join("\n") # Get only the top 10 because there are many traces.
