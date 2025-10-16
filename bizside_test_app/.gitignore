@@ -14,4 +14,7 @@
 /log/*.log
 /tmp
 
+# test coverage output dir
+/coverage
+
 /Gemfile.lock
