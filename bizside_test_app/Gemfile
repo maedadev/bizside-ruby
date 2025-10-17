@@ -48,8 +48,7 @@ group :test do
   gem 'puma'
   gem 'rails-controller-testing'
   gem 'RedCloth'
-  gem 'simplecov'
-  gem 'simplecov-rcov'
+  gem 'simplecov', require: false
   gem 'webmock'
 end
 
