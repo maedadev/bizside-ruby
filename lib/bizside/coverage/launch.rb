@@ -4,7 +4,7 @@ module Bizside
 
       def self.load
         if ENV["COVERAGE"].to_s.downcase == 'true' and ENV['ACCEPTANCE_TEST'].to_s.downcase == 'true'
-          setup()
+          require 'simplecov'
 
           SimpleCov.start 'rails' do
             SimpleCov.command_name(ENV['COMMAND_NAME']) if ENV['COMMAND_NAME']
@@ -15,21 +15,10 @@ module Bizside
 
       def self.load_from_test_helper
         if ENV["COVERAGE"] == 'true'
-          setup()
+          require 'simplecov'
           SimpleCov.start 'rails'
         end
       end
-
-      def self.setup
-        require 'simplecov'
-        require 'simplecov-rcov'
-        require_relative 'rcov_formatter'
-        SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-          SimpleCov::Formatter::HTMLFormatter,
-          Bizside::Coverage::RcovFormatter
-        ])
-      end
-      private_class_method :setup
     end
   end
 end
