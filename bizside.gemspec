@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'capistrano', '< 3.0.0'
   s.add_runtime_dependency 'carrierwave', '>= 2.2.0', '< 4.0.0'
   s.add_runtime_dependency 'carrierwave-magic', '~> 0.0.4'
+  s.add_runtime_dependency 'concurrent-ruby', '<= 1.3.4'
   s.add_runtime_dependency 'fog-aws', '~> 3.0'
   s.add_runtime_dependency 'faraday', '>= 0.12', '< 2.0.0'
   s.add_runtime_dependency 'ffi', '<= 1.17.0'
