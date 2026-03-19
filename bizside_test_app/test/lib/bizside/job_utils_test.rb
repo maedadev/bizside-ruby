@@ -222,13 +222,13 @@ class Bizside::JobUtilsTest < ActiveSupport::TestCase
         options[:after_enqueue] = 3
       end
       mock.expect(:perform, nil) do |options|
-        assert_equal({'foo' => 1, 'before_enqueue' => 2}, options, 'changes in after_perform was not propagated to resque worker')
+        assert_equal({'foo' => 1, 'before_enqueue' => 2}, options, "#{test_method}: changes in after_perform was not propagated to resque worker")
       end
 
       Bizside::JobUtils.send(test_method, *(extra_args + [mock, original_options]))
 
       mock.verify
-      assert_equal({foo: 1, before_enqueue: 2, after_enqueue: 3}, original_options, 'changes in after_perform was propagated to code that enqueued the job')
+      assert_equal({foo: 1, before_enqueue: 2, after_enqueue: 3}, original_options, "#{test_method}: changes in after_perform was propagated to code that enqueued the job")
     end
   end
 
