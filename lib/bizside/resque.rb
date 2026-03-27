@@ -25,7 +25,7 @@ require_relative 'audit/job_logger'
     resque_file = File.join(File.expand_path(ENV['RAILS_ROOT'] || '.'), file)
     next unless File.exist?(resque_file)
 
-    resque_config = ERB.new(File.read(resque_file), 0, '-').result.then do |text|
+    resque_config = ERB.new(File.read(resque_file), trim_mode: '-').result.then do |text|
       entire_config = resque_config_loader.call(text)
       entire_config[Bizside.env]
     end

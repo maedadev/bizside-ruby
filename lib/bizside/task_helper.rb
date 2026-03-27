@@ -247,7 +247,7 @@ end
 
 def self.render(template, options = {})
   FileUtils.mkdir_p(File.dirname(options[:to]))
-  File.write(options[:to], ERB.new(File.read(template), 0, '-').result)
+  File.write(options[:to], ERB.new(File.read(template), trim_mode: '-').result)
 end
 
 def self.ip_addresses
