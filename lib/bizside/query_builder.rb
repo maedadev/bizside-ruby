@@ -4,7 +4,7 @@ module Bizside
     attr_reader :sql, :params
 
     def initialize
-      @sql = ''
+      @sql = +''
       @params = []
       @indent = 0
     end

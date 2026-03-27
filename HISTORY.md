@@ -1,3 +1,6 @@
+## master
+  * 文字列リテラルを unfrozen に変更し frozen string literal に対応
+
 ## 3.1.4
   * ERBのレンダリング時にキーワード引数 trim_mode を使用
 

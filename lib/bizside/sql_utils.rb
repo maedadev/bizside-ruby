@@ -13,7 +13,7 @@ module Bizside
       end
 
       sql = []
-      sql[0] = '('
+      sql[0] = +'('
 
       query_string.gsub(/　/, ' ').split.each_with_index do |s, i|
         like = self.escape_search(s)
