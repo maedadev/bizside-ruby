@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'activesupport', '>= 5.0.0', '< 7.0.0'
   s.add_runtime_dependency 'aws-sdk-s3', '~> 1.94'
+  s.add_runtime_dependency 'benchmark', '>= 0'
   s.add_runtime_dependency 'capistrano', '< 3.0.0'
   s.add_runtime_dependency 'carrierwave', '>= 2.2.0', '< 4.0.0'
   s.add_runtime_dependency 'carrierwave-magic', '~> 0.0.4'

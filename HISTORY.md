@@ -1,3 +1,6 @@
+## 3.1.6
+  * ruby4.0 でデフォルトgemでなくなる予定の依存gemである benchmark を gemspec に追記
+
 ## 3.1.5
   * 文字列リテラルを unfrozen に変更し frozen string literal に対応
   * ruby3.4 でデフォルトgemでなくなった依存gemである csv, mutex_m, nkf を gemspec に追記
