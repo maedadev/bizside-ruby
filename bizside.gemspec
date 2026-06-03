@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ltsv', '~> 0.1'
   s.add_runtime_dependency 'mimemagic', '~> 0.3'
   s.add_runtime_dependency 'mime-types', '~> 3.1'
-  s.add_runtime_dependency 'multi_json', '~> 1.15'
+  s.add_runtime_dependency 'multi_json', '~> 1.15', '< 1.21.0'
   s.add_runtime_dependency 'mutex_m', '>= 0'
   s.add_runtime_dependency 'nkf', '>= 0'
   s.add_runtime_dependency 'rake', '>= 12.3', '< 14.0'

@@ -1,3 +1,10 @@
+## 3.1.7
+  * MultiJSON の以下の警告が出ないバージョンに制限
+    ```
+    MultiJSON.dump is deprecated and will be removed in v2.0. Use MultiJSON.generate instead.
+    MultiJSON.load is deprecated and will be removed in v2.0. Use MultiJSON.parse instead.
+    ```
+
 ## 3.1.6
   * ruby4.0 でデフォルトgemでなくなる予定の依存gemである benchmark を gemspec に追記
 
