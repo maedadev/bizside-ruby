@@ -1,3 +1,6 @@
+## 3.1.9
+  * JobUtilsの遅延ジョブ重複チェックで誤検知する問題を修正
+
 ## 3.1.8
   * ジョブ監査ログのserver_address取得時にSocket.gethostnameを優先するように変更
 
