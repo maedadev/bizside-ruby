@@ -109,26 +109,17 @@ module Bizside
     end
 
     # Resque.delayed? は @queue の定義がない場合に機能しないため、独自に実装
-    def self.delayed?(klass, args, except: [], grace_period: 5.0)
+    def self.delayed?(klass, args, except: [])
       args_to_check = args.with_indifferent_access.except(*Array(except))
-      now_f = Time.now.to_f
-  
-      delayed_queue_peek(0, delayed_queue_schedule_size).each do |timestamp|
-        delayed_timestamp_peek(timestamp, 0, delayed_timestamp_size(timestamp)).each do |job_info|
+
+      JobUtils.delayed_queue_peek(0, JobUtils.delayed_queue_schedule_size).each do |timestamp|
+        JobUtils.delayed_timestamp_peek(timestamp, 0, JobUtils.delayed_timestamp_size(timestamp)).each do |job_info|
           job_args = job_info['args'].first.presence || {}
           job_args = job_args.with_indifferent_access.except(*Array(except))
-          next unless job_info['class'] == klass.to_s && job_args == args_to_check
-                 
-          # 実行時刻と現在時刻の差が小さければキューイングを試行している自分自身とみなしてスキップ
-          # grace_period以内は実行直前と見なす
-          scheduled_at = timestamp.to_f
-          if (scheduled_at - now_f).abs < grace_period
-            Rails.logger.debug("[delayed?] skip duplicate-check for job scheduled_at=#{scheduled_at}, now=#{now_f}")
-            next
+          if job_info['class'] == klass.to_s && job_args == args_to_check
+            Rails.logger.info "遅延ジョブに #{job_info} がすでに登録されています。"
+            return true
           end
-  
-          Rails.logger.info "遅延ジョブに #{job_info} がすでに登録されています。"
-          return true
         end
       end
 
