@@ -1,3 +1,9 @@
+## 3.1.11
+  * ImageMagick 6.9.13.58 で、画像のアップロードが `no encode delegate for this image format` で失敗する問題に対応
+    * ImageMagick 6.9.13.58 では、mogrify を出力先の指定なしで実行（上書き）すると失敗する
+    * Bizside::Uploader::Exif の auto_orient と strip を、mogrify の上書きではなく convert で処理するように変更
+    * 通常の順序（auto_orient の後に strip）では処理結果は変わらない。strip だけを単独で実行した場合は、画像の向きも補正されるようになる
+
 ## 3.1.10
   * v3.1.9 での修正を取り消し、v3.1.9 を廃版に
 
